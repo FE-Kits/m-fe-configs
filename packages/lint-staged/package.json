@@ -1,0 +1,20 @@
+{
+  "name": "m-fe-lint-staged",
+  "version": "0.8.2",
+  "description": "Shareable lint-staged Configuration for all micro-frontend projects.",
+  "repository": "https://github.com/wx-chevalier/m-fe-configs",
+  "author": "wx-chevalier",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": "^6.4.0",
+    "lint-staged": "^9.4.0",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "@prettier/plugin-pug": "^1.0.3",
+    "prettier-plugin-toml": "^0.3.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

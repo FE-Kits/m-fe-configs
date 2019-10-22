@@ -41,7 +41,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/unified-signatures': 2,
-    'import/no-duplicates': 2,
     // Ignored rules
     'import/default': 0,
     'import/named': 0,

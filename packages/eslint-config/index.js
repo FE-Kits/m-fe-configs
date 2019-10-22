@@ -1,28 +1,25 @@
-const path = require('path');
+const path = require('path')
 
-const { getGlobals } = require('eslint-plugin-mdx');
+const { getGlobals } = require('eslint-plugin-mdx')
 
 const {
   allowModules,
-  identity,
-  isBrowserslistEnabled,
   isSrcDirAvailable,
   isWebpackAvailable,
   magicNumbers,
-  webpackSpecVars
-} = require('./_util');
+  webpackSpecVars,
+} = require('./_util')
 
 module.exports = {
   extends: [
     'eslint:recommended',
-    isBrowserslistEnabled && 'plugin:compat/recommended',
     'plugin:import/recommended',
     'plugin:node/recommended',
     'plugin:promise/recommended',
     'standard',
     'plugin:prettier/recommended',
-    'prettier/standard'
-  ].filter(identity),
+    'prettier/standard',
+  ],
   settings: {
     node: {
       allowModules,
@@ -36,9 +33,9 @@ module.exports = {
         '.jsx',
         '.json',
         '.node',
-        '.mdx'
-      ]
-    }
+        '.mdx',
+      ],
+    },
   },
   globals: isWebpackAvailable && getGlobals(webpackSpecVars),
   rules: {
@@ -47,20 +44,20 @@ module.exports = {
       {
         properties: 'never',
         ignoreDestructuring: true,
-        allow: isWebpackAvailable && webpackSpecVars
-      }
+        allow: isWebpackAvailable && webpackSpecVars,
+      },
     ],
     'import/order': [
       2,
       {
-        'newlines-between': 'always'
-      }
+        'newlines-between': 'always',
+      },
     ],
     'no-empty': [
       2,
       {
-        allowEmptyCatch: true
-      }
+        allowEmptyCatch: true,
+      },
     ],
     'no-empty-function': 2,
     'no-magic-numbers': [
@@ -68,11 +65,13 @@ module.exports = {
       {
         enforceConst: true,
         ignore: magicNumbers,
-        ignoreArrayIndexes: true
-      }
+        ignoreArrayIndexes: true,
+      },
     ],
+    'node/no-unsupported-features/es-syntax': 0,
+    'node/no-unsupported-features/node-builtins': 0,
     'node/no-unpublished-import': 0,
     'node/no-unpublished-require': 0,
-    'prefer-const': 2
-  }
-};
+    'prefer-const': 2,
+  },
+}

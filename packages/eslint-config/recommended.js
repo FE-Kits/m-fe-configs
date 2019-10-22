@@ -1,6 +1,6 @@
 const { overrides } = require('./overrides')
 
 module.exports = {
-  extends: ['@m-fe'],
+  extends: ['@wx-fc'],
   overrides,
 }

@@ -1,4 +1,4 @@
-const baseConfig = require('.')
+const baseConfig = require('.');
 
 module.exports = Object.assign({}, baseConfig, {
   rules: Object.assign({}, baseConfig.rules, {
@@ -7,4 +7,4 @@ module.exports = Object.assign({}, baseConfig, {
     'scss/media-feature-value-dollar-variable': null,
     'scss/selector-nest-combinators': null,
   }),
-})
+});

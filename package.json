@@ -55,20 +55,30 @@
     "vue": "^2.6.10",
     "webpack": "^4.41.0"
   },
+  "browserslist": [
+    "extends @wx-fc/browserslist-config/modern"
+  ],
   "commitlint": {
     "extends": [
-      "@m-fe"
+      "@wx-fc"
     ]
   },
-  "eslintIgnore": [
-    "lib",
-    "node_modules",
-    "CHANGELOG.md",
-    "!.*.js"
-  ],
   "prettier": "@wx-fc/prettier-config/semi",
+  "remarkConfig": {
+    "plugins": [
+      "@wx-fc/remark-config"
+    ]
+  },
   "stylelint": {
-    "extends": "@wx-fc/stylelint-config/scss",
-    "ignoreFiles": "*.less"
+    "extends": [
+      "@wx-fc/stylelint-config",
+      "@wx-fc/stylelint-config/modules"
+    ],
+    "rules": {
+      "font-family-no-missing-generic-family-keyword": null,
+      "no-descending-specificity": null,
+      "plugin/no-unsupported-browser-features": null,
+      "plugin/no-low-performance-animation-properties": null
+    }
   }
 }

@@ -33,4 +33,4 @@ module.exports = {
     'scss/selector-nest-combinators': 'always',
     'scss/selector-no-redundant-nesting-selector': true,
   },
-}
+};

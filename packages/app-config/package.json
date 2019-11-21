@@ -1,6 +1,6 @@
 {
   "name": "@wx-fc/app-config",
-  "version": "0.1.28",
+  "version": "0.1.30",
   "description": "Shareable Babel Preset for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "homepage": "https://github.com/wx-chevalier/m-fe-configs",
@@ -30,7 +30,7 @@
     "@wx-fc/postcss-config": "^0.0.3",
     "@wx-fc/prettier-config": "^0.0.2",
     "@wx-fc/remark-config": "^0.0.1",
-    "@wx-fc/stylelint-config": "^0.0.4",
+    "@wx-fc/stylelint-config": "^0.0.6",
     "@wx-fc/tsconfig": "^0.0.3",
     "@wx-fc/tslint-config": "^0.0.1",
     "@wx-fc/webpack-config": "^0.0.6",

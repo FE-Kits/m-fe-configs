@@ -5,8 +5,8 @@
     "declaration": false,
     "declarationMap": false,
     "paths": {
-      "*": [
-        "src/*"
+      "@/*": [
+        "./src/*"
       ]
     },
     "outDir": "dist"

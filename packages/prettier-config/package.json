@@ -6,11 +6,13 @@
   "author": "wx-chevalier",
   "license": "MIT",
   "peerDependencies": {
-    "prettier": "^1.18.2"
+    "prettier": ">=1.18.0"
   },
   "dependencies": {
-    "@prettier/plugin-pug": "^1.0.3",
-    "prettier-plugin-pkg": "^0.4.3",
+    "@prettier/plugin-pug": "^1.0.10",
+    "@prettier/plugin-ruby": "^0.16.0",
+    "prettier-plugin-pkg": "^0.4.5",
+    "prettier-plugin-sh": "^0.2.3",
     "prettier-plugin-toml": "^0.3.1"
   },
   "publishConfig": {

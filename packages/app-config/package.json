@@ -1,0 +1,51 @@
+{
+  "name": "@wx-fc/app-config",
+  "version": "0.1.28",
+  "description": "Shareable Babel Preset for all micro-frontend projects.",
+  "repository": "https://github.com/wx-chevalier/m-fe-configs",
+  "homepage": "https://github.com/wx-chevalier/m-fe-configs",
+  "author": "wx-chevalier",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^4.3.3",
+    "@types/classnames": "^2.2.9",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "24.0.23",
+    "@types/lodash": "^4.14.149",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-router-dom": "^5.1.2",
+    "@types/redux-actions": "^2.6.1",
+    "@types/redux-pack": "^0.1.4",
+    "@types/smoothscroll-polyfill": "^0.3.1",
+    "@wx-fc/browserslist-config": "^0.0.1",
+    "@wx-fc/commitlint-config": "^0.0.1",
+    "@wx-fc/eslint-config": "^0.0.8",
+    "@wx-fc/husky-config": "^0.0.1",
+    "@wx-fc/jest-config": "^0.0.3",
+    "@wx-fc/lint-staged": "^0.0.1",
+    "@wx-fc/postcss-config": "^0.0.3",
+    "@wx-fc/prettier-config": "^0.0.2",
+    "@wx-fc/remark-config": "^0.0.1",
+    "@wx-fc/stylelint-config": "^0.0.4",
+    "@wx-fc/tsconfig": "^0.0.3",
+    "@wx-fc/tslint-config": "^0.0.1",
+    "@wx-fc/webpack-config": "^0.0.6",
+    "eslint": "^6.6.0",
+    "husky": "^3.1.0",
+    "json-server": "0.15.1",
+    "lint-staged": "^9.4.3",
+    "npm-run-all": "^4.1.5",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^3.0.0",
+    "stylelint": "^12.0.0",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

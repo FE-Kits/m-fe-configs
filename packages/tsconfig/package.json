@@ -1,6 +1,6 @@
 {
   "name": "@wx-fc/tsconfig",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Shareable TypeScript Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

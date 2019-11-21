@@ -1,11 +1,20 @@
-let isLernaAvailable;
+const { isPkgAvailable } = require('@pkgr/utils');
+const conventionalConfig = require('@commitlint/config-conventional');
+const lernaScopesConfig = require('@commitlint/config-lerna-scopes');
 
-try {
-  // eslint-disable-next-line node/no-extraneous-require
-  require.resolve('lerna');
-  isLernaAvailable = true;
-} catch (e) {}
+const MERGE_PROPERTIES = ['rules', 'utils'];
 
-module.exports = isLernaAvailable
-  ? require('@commitlint/config-lerna-scopes')
-  : require('@commitlint/config-conventional');
+module.exports = isPkgAvailable('lerna')
+  ? Object.assign(
+      {},
+      conventionalConfig,
+      MERGE_PROPERTIES.reduce((config, property) => {
+        config[property] = Object.assign(
+          {},
+          conventionalConfig[property],
+          lernaScopesConfig[property],
+        );
+        return config;
+      }, {}),
+    )
+  : conventionalConfig;

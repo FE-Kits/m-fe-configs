@@ -2,8 +2,9 @@
 
 const path = require('path');
 const process = require('process');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
+
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const RewriteImportPlugin = require('less-plugin-rewrite-import');

@@ -16,6 +16,20 @@
     "sourceMap": true,
     "strict": true,
     "stripInternal": true,
-    "target": "es5"
-  }
+    "target": "es5",
+    "outDir": "dist",
+  },
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "assets",
+    "build",
+    "dist",
+    "indep-pkgs",
+    "node_modules",
+    "scripts",
+    "ssr",
+    "stories",
+    "__test__",
+    "test"
+  ]
 }

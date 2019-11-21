@@ -1,6 +1,6 @@
 {
   "name": "@wx-fc/browserslist-config",
-  "version": "0.2.1",
+  "version": "0.0.1",
   "description": "Shareable Browserslist Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

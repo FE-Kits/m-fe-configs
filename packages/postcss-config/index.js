@@ -1,21 +1,46 @@
-const { NODE_ENV = 'development' } = process.env
+const DEV = 'development';
 
-module.exports = (options = {}) => {
-  const config = {
-    plugins: [
-      require('postcss-preset-env', options.presetEnv),
-      require('postcss-import', options.import),
-      require('postcss-normalize', options.normalize),
-      require('postcss-url', options.url),
-      require('autoprefixer'),
-    ],
+module.exports = ({
+  advanced,
+  env = process.env.NODE_ENV || DEV,
+  import: importOptions,
+  modules,
+  normalize,
+  presetEnv,
+  url,
+  ...options
+} = {}) => {
+  const plugins = [
+    require('postcss-preset-env', presetEnv),
+    require('postcss-import', importOptions),
+    require('postcss-normalize', normalize),
+    require('postcss-url', url),
+    require('autoprefixer'),
+  ];
+
+  const isDev = env === DEV;
+  const isProd = env === 'production';
+
+  if (modules) {
+    plugins.push(
+      require('postcss-modules', {
+        globalModulePaths: [
+          /[\\/]node_modules[\\/]/,
+          /(\bglobals?[\\/][-\w]+|\.globals?)\.(p?css|less|s[ac]ss|styl(us)?)$/,
+        ],
+        generateScopedName: isProd
+          ? '[hash:base64:10]'
+          : '[path][name]__[local]---[hash:base64:5]',
+        ...modules,
+      }),
+    );
   }
 
-  if ((options.env || NODE_ENV) === 'production') {
-    config.plugins.push(
+  if (isProd) {
+    plugins.push(
       require('cssnano', {
         preset: [
-          options.advanced ? 'advanced' : 'default',
+          advanced ? 'advanced' : 'default',
           {
             discardComments: {
               removeAll: true,
@@ -23,8 +48,12 @@ module.exports = (options = {}) => {
           },
         ],
       }),
-    )
+    );
   }
 
-  return config
-}
+  return {
+    ...options,
+    map: isDev,
+    plugins,
+  };
+};

@@ -25,7 +25,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@wx-fc/prettier-config": "^0.0.2"
+    "@wx-fc/app-config": "^0.1.27"
   },
   "devDependencies": {
     "@angular/core": "^8.2.8",
@@ -35,9 +35,6 @@
     "@types/node": "^12.7.8",
     "@types/react": "^16.9.3",
     "@types/unist": "^2.0.3",
-    "@wx-fc/eslint-config": "0.0.6",
-    "@wx-fc/husky-config": "^0.0.1",
-    "@wx-fc/stylelint-config": "^0.0.1",
     "browserslist": "^4.7.0",
     "eslint": "^6.4.0",
     "husky": "^3.0.5",

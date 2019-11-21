@@ -1,4 +1,4 @@
-const config = require('@wx-fc/stylelint-config')
+const config = require('@wx-fc/stylelint-config');
 
 module.exports = {
   ...config,
@@ -6,4 +6,4 @@ module.exports = {
     ...config.rules,
     'plugin/no-unsupported-browser-features': null,
   },
-}
+};

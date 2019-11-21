@@ -1,27 +1,27 @@
 /* eslint-disable node/no-extraneous-require */
-const fs = require('fs')
-const { resolve } = require('path')
+const fs = require('fs');
+const { resolve } = require('path');
 
-const isGlob = require('is-glob')
-const globSync = require('tiny-glob/sync')
+const isGlob = require('is-glob');
+const globSync = require('tiny-glob/sync');
 
-exports.tryFile = filePath => (fs.existsSync(filePath) ? filePath : undefined)
+exports.tryFile = filePath => (fs.existsSync(filePath) ? filePath : undefined);
 
-let pkg = {}
-
-try {
-  pkg = require(resolve('package.json'))
-} catch (e) {}
-
-let lernaConfig
+let pkg = {};
 
 try {
-  lernaConfig = require(resolve('lerna.json'))
+  pkg = require(resolve('package.json'));
 } catch (e) {}
 
-const pkgsPath = (lernaConfig && lernaConfig.packages) || pkg.workspaces
+let lernaConfig;
 
-exports.isMonorepo = Array.isArray(pkgsPath)
+try {
+  lernaConfig = require(resolve('lerna.json'));
+} catch (e) {}
+
+const pkgsPath = (lernaConfig && lernaConfig.packages) || pkg.workspaces;
+
+exports.isMonorepo = Array.isArray(pkgsPath);
 
 if (exports.isMonorepo) {
   const pkgs = pkgsPath.reduce(
@@ -34,38 +34,38 @@ if (exports.isMonorepo) {
         )
         .filter(Boolean),
     [],
-  )
+  );
 
   try {
     exports.allowModules = pkgs.reduce((acc, pkg) => {
-      const pkgJson = resolve(pkg, 'package.json')
-      return fs.existsSync(pkgJson) ? acc.concat(require(pkgJson).name) : acc
-    }, [])
+      const pkgJson = resolve(pkg, 'package.json');
+      return fs.existsSync(pkgJson) ? acc.concat(require(pkgJson).name) : acc;
+    }, []);
   } catch (e) {}
 }
 
 try {
-  exports.isSrcDirAvailable = fs.statSync(resolve('src')).isDirectory()
+  exports.isSrcDirAvailable = fs.statSync(resolve('src')).isDirectory();
 } catch (e) {}
 
 try {
-  exports.isSrcAppDirAvailable = fs.statSync(resolve('src/app')).isDirectory()
+  exports.isSrcAppDirAvailable = fs.statSync(resolve('src/app')).isDirectory();
 } catch (e) {}
 
 try {
-  exports.isNgAvailable = !!require.resolve('@angular/core')
+  exports.isNgAvailable = !!require.resolve('@angular/core');
 } catch (e) {}
 
 try {
-  exports.isReactAvailable = !!require.resolve('react')
+  exports.isReactAvailable = !!require.resolve('react');
 } catch (e) {}
 
 try {
-  exports.isVueAvailable = !!require.resolve('vue')
+  exports.isVueAvailable = !!require.resolve('vue');
 } catch (e) {}
 
 try {
-  exports.isWebpackAvailable = !!require.resolve('webpack')
+  exports.isWebpackAvailable = !!require.resolve('webpack');
 } catch (e) {}
 
 // https://webpack.js.org/api/module-variables/#__resourcequery-webpack-specific
@@ -78,7 +78,7 @@ exports.webpackSpecVars = [
   '__webpack_public_path__',
   '__webpack_require__',
   'DEBUG',
-]
+];
 
 exports.magicNumbers = [
   -1,
@@ -101,4 +101,4 @@ exports.magicNumbers = [
   1000,
   1024,
   3600,
-]
+];

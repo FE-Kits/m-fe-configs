@@ -1,5 +1,5 @@
 {
-  "name": "m-fe-imagemin",
+  "name": "@wx-fc/imagemin",
   "version": "0.0.1",
   "description": "Shareable imagemin cli for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

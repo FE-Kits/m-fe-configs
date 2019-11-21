@@ -9,7 +9,7 @@ let isImageminAvailable;
 
 try {
   // eslint-disable-next-line node/no-extraneous-require
-  isImageminAvailable = !!require.resolve('m-fe-imagemin');
+  isImageminAvailable = !!require.resolve('@wx-fc/imagemin');
 } catch (e) {}
 
 const config = {

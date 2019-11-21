@@ -78,4 +78,4 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'jsx-indent': 0,
   },
-}
+};

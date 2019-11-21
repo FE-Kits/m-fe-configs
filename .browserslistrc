@@ -1,2 +1,2 @@
-extends m-fe-browserslist-config
+extends @wx-fc/browserslist-config
 > 0%

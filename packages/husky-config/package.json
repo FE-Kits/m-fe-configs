@@ -1,5 +1,5 @@
 {
-  "name": "m-fe-husky-config",
+  "name": "@wx-fc/husky-config",
   "version": "0.0.1",
   "description": "Shareable husky Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

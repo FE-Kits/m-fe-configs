@@ -1,5 +1,5 @@
 {
-  "name": "m-fe-lint-staged",
+  "name": "@wx-fc/lint-staged",
   "version": "0.0.1",
   "description": "Shareable lint-staged Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@prettier/plugin-pug": "^1.0.3",
-    "m-fe-imagemin": "^0.0.1",
+    "@wx-fc/imagemin": "^0.0.1",
     "prettier-plugin-toml": "^0.3.1"
   },
   "publishConfig": {

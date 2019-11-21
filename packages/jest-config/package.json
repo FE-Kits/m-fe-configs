@@ -1,18 +1,19 @@
 {
-  "name": "@wx-fc/commitlint-config",
+  "name": "@wx-fc/jest-config",
   "version": "0.0.1",
   "description": "Shareable Commitlint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
   "license": "MIT",
-  "peerDependencies": {
-    "@commitlint/cli": "^8.2.0"
-  },
-  "dependencies": {
-    "@commitlint/config-conventional": "^8.2.0",
-    "@commitlint/config-lerna-scopes": "^8.2.0"
-  },
+  "peerDependencies": {},
+  "dependencies": {},
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
+    "jest-fetch-mock": "^2.1.2"
   }
 }

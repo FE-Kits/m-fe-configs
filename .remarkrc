@@ -1,5 +1,5 @@
 {
   "plugins": [
-    "m-fe-remark-config"
+    "@wx-fc/remark-config"
   ]
 }

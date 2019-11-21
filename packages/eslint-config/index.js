@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require('path');
 
-const { getGlobals } = require('eslint-plugin-mdx')
+const { getGlobals } = require('eslint-plugin-mdx');
 
 const {
   allowModules,
@@ -8,7 +8,7 @@ const {
   isWebpackAvailable,
   magicNumbers,
   webpackSpecVars,
-} = require('./_util')
+} = require('./_util');
 
 module.exports = {
   extends: [
@@ -74,4 +74,4 @@ module.exports = {
     'node/no-unpublished-require': 0,
     'prefer-const': 2,
   },
-}
+};

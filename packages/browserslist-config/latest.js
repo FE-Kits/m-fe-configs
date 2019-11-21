@@ -5,4 +5,4 @@ module.exports = [
   'last 1 FireFox version',
   'last 1 iOS version',
   'last 1 Safari version',
-]
+];

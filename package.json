@@ -1,5 +1,5 @@
 {
-  "name": "m-fe-configs",
+  "name": "@wx-fc/configs",
   "version": "0.0.0",
   "description": "Shareable Configurations for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
@@ -24,6 +24,9 @@
     "lint:tsc": "tsc",
     "test": "jest"
   },
+  "dependencies": {
+    "@wx-fc/prettier-config": "^0.0.2"
+  },
   "devDependencies": {
     "@angular/core": "^8.2.8",
     "@babel/core": "^7.6.2",
@@ -32,6 +35,9 @@
     "@types/node": "^12.7.8",
     "@types/react": "^16.9.3",
     "@types/unist": "^2.0.3",
+    "@wx-fc/eslint-config": "0.0.6",
+    "@wx-fc/husky-config": "^0.0.1",
+    "@wx-fc/stylelint-config": "^0.0.1",
     "browserslist": "^4.7.0",
     "eslint": "^6.4.0",
     "husky": "^3.0.5",
@@ -39,8 +45,6 @@
     "lerna": "^3.16.4",
     "lerna-changelog": "^0.8.2",
     "lint-staged": "^9.4.0",
-    "m-fe-eslint-config": "^0.0.1",
-    "m-fe-husky-config": "^0.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.18",
     "prettier": "^1.18.2",
@@ -65,9 +69,9 @@
     "CHANGELOG.md",
     "!.*.js"
   ],
-  "prettier": "m-fe-prettier-config",
+  "prettier": "@wx-fc/prettier-config/semi",
   "stylelint": {
-    "extends": "m-fe-stylelint-config/scss",
+    "extends": "@wx-fc/stylelint-config/scss",
     "ignoreFiles": "*.less"
   }
 }

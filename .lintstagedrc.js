@@ -1,1 +1,1 @@
-module.exports = require('m-fe-lint-staged')
+module.exports = require('@wx-fc/lint-staged')

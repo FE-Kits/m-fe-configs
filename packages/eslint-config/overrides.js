@@ -1,5 +1,5 @@
-const fs = require('fs')
-const { resolve } = require('path')
+const fs = require('fs');
+const { resolve } = require('path');
 
 const {
   isNgAvailable,
@@ -9,18 +9,18 @@ const {
   magicNumbers,
   tryFile,
   webpackSpecVars,
-} = require('./_util')
+} = require('./_util');
 
-const BABEL_CONFIG = resolve('babel.config.js')
-const BABEL_RC_CONFIG = resolve('.babelrc.js')
+const BABEL_CONFIG = resolve('babel.config.js');
+const BABEL_RC_CONFIG = resolve('.babelrc.js');
 
-let configFile
+let configFile;
 
 try {
   configFile =
     tryFile(BABEL_CONFIG) ||
     tryFile(BABEL_RC_CONFIG) ||
-    require.resolve('@1stg/babel-preset/config')
+    require.resolve('@1stg/babel-preset/config');
 } catch (e) {}
 
 exports.js = {
@@ -44,18 +44,18 @@ exports.js = {
     'babel/no-unused-expressions': 2,
     'babel/valid-typeof': 2,
   },
-}
+};
 
 const TS_CONFIGS = [
   tryFile(resolve('tsconfig.eslint.json')) ||
     tryFile(resolve('tsconfig.base.json')) ||
     tryFile(resolve('tsconfig.json')),
-].filter(Boolean)
+].filter(Boolean);
 
-let project
+let project;
 
 try {
-  project = TS_CONFIGS.length ? TS_CONFIGS : require.resolve('@1stg/tsconfig')
+  project = TS_CONFIGS.length ? TS_CONFIGS : require.resolve('@1stg/tsconfig');
 } catch (e) {}
 
 const resolveSettings = {
@@ -84,7 +84,7 @@ const resolveSettings = {
       '.mdx',
     ],
   },
-}
+};
 
 const tsBase = {
   files: '*.{ts,tsx}',
@@ -191,7 +191,7 @@ const tsBase = {
     'promise/always-return': 0,
     'promise/catch-or-return': 0,
   },
-}
+};
 
 exports.ts = [
   tsBase,
@@ -240,7 +240,7 @@ exports.ts = [
       'no-magic-numbers': 0,
     },
   },
-]
+];
 
 exports.dTs = {
   files: '*.d.ts',
@@ -252,21 +252,21 @@ exports.dTs = {
     'import/order': 0,
     'node/no-extraneous-import': 0,
   },
-}
+};
 
-let tslint = false
+let tslint = false;
 
 try {
-  tslint = !!require.resolve('tslint')
+  tslint = !!require.resolve('tslint');
 } catch (e) {}
 
-const TSLINT_CONFIG = resolve('tslint.json')
-const tslintConfigAvailable = fs.existsSync(TSLINT_CONFIG)
+const TSLINT_CONFIG = resolve('tslint.json');
+const tslintConfigAvailable = fs.existsSync(TSLINT_CONFIG);
 
-let lintFile = tslintConfigAvailable ? TSLINT_CONFIG : undefined
+let lintFile = tslintConfigAvailable ? TSLINT_CONFIG : undefined;
 
 try {
-  lintFile = lintFile || require.resolve('@1stg/tslint-config')
+  lintFile = lintFile || require.resolve('@1stg/tslint-config');
 } catch (e) {}
 
 exports.tslint = {
@@ -287,7 +287,7 @@ exports.tslint = {
       ],
     },
   ),
-}
+};
 
 exports.angular = [
   {
@@ -302,7 +302,7 @@ exports.angular = [
       '@typescript-eslint/no-extraneous-class': 0,
     },
   },
-]
+];
 
 const reactJsx = {
   extends: [
@@ -317,7 +317,7 @@ const reactJsx = {
       version: 'detect',
     },
   },
-}
+};
 
 exports.react = [
   Object.assign(
@@ -342,7 +342,7 @@ exports.react = [
       'react/display-name': 0,
     },
   },
-]
+];
 
 exports.reactHooks = {
   files: '*.{js,jsx,ts,tsx}',
@@ -351,7 +351,7 @@ exports.reactHooks = {
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 2,
   },
-}
+};
 
 exports.reactTs = {
   files: '*.{ts,tsx}',
@@ -359,7 +359,7 @@ exports.reactTs = {
     'no-restricted-imports': [2, 'prop-types'],
     'react/prop-types': 0,
   },
-}
+};
 
 exports.vue = Object.assign({}, tsBase, {
   files: ['*.vue'],
@@ -368,40 +368,40 @@ exports.vue = Object.assign({}, tsBase, {
     extraFileExtensions: ['.vue'],
   },
   extends: tsBase.extends.concat('plugin:vue/recommended', 'prettier/vue'),
-})
+});
 
 exports.mdx = Object.assign({}, reactJsx, {
   files: '*.{md,mdx}',
   extends: reactJsx.extends.concat(['plugin:mdx/recommended']),
   settings: Object.assign({}, reactJsx.settings, resolveSettings),
-})
+});
 
 const nonSourceRules = {
   'node/no-extraneous-import': 0,
   'node/no-extraneous-require': 0,
   'node/no-unsupported-features/es-builtins': 0,
-}
+};
 
 exports.test = {
   files: '**/{__test__,test,tests}/**/*.{js,jsx,mdx,ts,tsx,vue}',
   rules: nonSourceRules,
-}
+};
 
 exports.jest = {
   files: '*.{spec,test}.{js,jsx,ts,tsx}',
   extends: ['plugin:jest/recommended'],
   rules: exports.test.rules,
-}
+};
 
 exports.stories = {
   files: '**/stories/**/*.{js,jsx,mdx,ts,tsx,vue}',
   rules: nonSourceRules,
-}
+};
 
 exports.config = {
   files: ['.*rc.js', '*.config.{js,ts}'],
   rules: nonSourceRules,
-}
+};
 
 exports.overrides = exports.ts
   .concat(
@@ -419,4 +419,4 @@ exports.overrides = exports.ts
     exports.stories,
     exports.config,
   )
-  .filter(Boolean)
+  .filter(Boolean);

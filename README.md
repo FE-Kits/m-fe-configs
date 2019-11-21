@@ -1,6 +1,6 @@
-# m-fe-configs
+# @wx-fc/configs
 
-m-fe-configs 是对于笔者通用前端项目中的配置项的统一提取。
+@wx-fc/configs 是对于笔者通用前端项目中的配置项的统一提取。
 
 # TOC | 目录索引
 
@@ -14,15 +14,15 @@ m-fe-configs 是对于笔者通用前端项目中的配置项的统一提取。
 
 - [fe-boilerplates](https://github.com/wx-chevalier/fe-boilerplates): Lucid & Futuristic Production Boilerplates For Frontend(Web) Apps, React/RN/Vue, with TypeScript(Optional), Webpack 4/Parcel, MobX/Redux :dizzy: 多技术栈前端项目模板
 
-- [m-fe-configs](https://github.com/wx-chevalier/m-fe-configs)：Common Dev Configs(ESLint, Prettier, Husky, etc.) for Micro-Frontend Apps
+- [@wx-fc/configs](https://github.com/wx-chevalier/m-fe-configs)：Common Dev Configs(ESLint, Prettier, Husky, etc.) for Micro-Frontend Apps
 
 - [react-snippets](https://github.com/wx-chevalier/react-snippets): React Snippets(.ts/.tsx), about design patterns/techniques used while developing with React and TypeScript.
 
-- [m-fe-rtw](https://github.com/wx-chevalier/m-fe-rtw): Micro-Frontend boilerplate with React & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
+- [@wx-fc/rtw](https://github.com/wx-chevalier/@wx-fc/rtw): Micro-Frontend boilerplate with React & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
 
 - [vue-snippets](https://github.com/wx-chevalier/vue-snippets): Vue Snippets(.js/.ts), about design patterns/techniques used while developing with Vue and JavaScript/TypeScript.
 
-- [m-fe-vtw](https://github.com/wx-chevalier/m-fe-vtw): Micro-Frontend boilerplate with Vue & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
+- [@wx-fc/vtw](https://github.com/wx-chevalier/@wx-fc/vtw): Micro-Frontend boilerplate with Vue & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
 
 - [fractal-components](https://github.com/wx-chevalier/fractal-components): Massive Fractal Components in Several Libraries(Vanilla, React, Vue, Weapp), for building your great apps easily again
 

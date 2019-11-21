@@ -1,4 +1,4 @@
-const config = require('m-fe-stylelint-config')
+const config = require('@wx-fc/stylelint-config')
 
 module.exports = {
   ...config,

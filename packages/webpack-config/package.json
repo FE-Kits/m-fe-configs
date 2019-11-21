@@ -1,0 +1,18 @@
+{
+  "name": "@wx-fc/webpack-config",
+  "version": "0.0.1",
+  "description": "Shareable Browserslist Configuration for all micro-frontend projects.",
+  "repository": "https://github.com/wx-chevalier/m-fe-configs",
+  "author": "wx-chevalier",
+  "license": "MIT",
+  "peerDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "html-webpack-harddisk-plugin": "^1.0.1",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "lazy-compile-webpack-plugin": "^0.1.11",
+    "workbox-webpack-plugin": "^4.3.1"
+  }
+}

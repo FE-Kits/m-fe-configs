@@ -1,6 +1,6 @@
 {
-  "name": "m-fe-remark-config",
-  "version": "0.2.2",
+  "name": "@wx-fc/remark-config",
+  "version": "0.0.1",
   "description": "Shareable Remark Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

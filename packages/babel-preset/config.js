@@ -1,3 +1,3 @@
 module.exports = {
-  presets: ['@m-fe'],
+  presets: ['m-fe'],
 }

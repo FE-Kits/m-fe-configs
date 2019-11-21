@@ -1,5 +1,5 @@
 {
-  "name": "m-fe-babel-preset",
+  "name": "@wx-fc/babel-preset",
   "version": "0.7.0",
   "description": "Shareable Babel Preset for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

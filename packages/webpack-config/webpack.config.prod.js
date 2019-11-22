@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack');
 const path = require('path');
 
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -12,23 +13,15 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
-const { buildEnv } = baseConfig.extra;
+const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
 
-const config = {
-  ...baseConfig,
+delete baseConfig.extra;
+
+const config = merge(baseConfig, {
   devtool: 'hidden-source-map',
   mode: 'production',
-  output: {
-    ...baseConfig.output,
-  },
   module: {
     rules: [
-      ...baseConfig.module.rules.filter(
-        rule =>
-          !['/\\.css$/', '/\\.less$/', '/\\.(scss|sass)$/'].includes(
-            rule.test.toString(),
-          ),
-      ),
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
@@ -38,9 +31,9 @@ const config = {
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
-          baseConfig.extra.moduleCSSLoader,
+          moduleCSSLoader,
           'postcss-loader',
-          baseConfig.extra.lessLoader,
+          lessLoader,
         ],
       },
       {
@@ -50,14 +43,12 @@ const config = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          baseConfig.extra.lessLoader,
+          lessLoader,
         ],
       },
     ],
   },
   plugins: [
-    ...baseConfig.plugins,
-
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(false),
     }),
@@ -151,8 +142,6 @@ const config = {
       },
     },
   },
-};
-
-delete config.extra;
+});
 
 module.exports = config;

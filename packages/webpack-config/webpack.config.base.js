@@ -2,8 +2,8 @@
 
 const path = require('path');
 const process = require('process');
-const webpack = require('webpack');
 
+const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -18,7 +18,7 @@ const hashType = __DEV__ ? 'hash' : 'contenthash';
 const packageName = require(path.resolve(rootPath, 'package.json'));
 
 console.log(
-  `\nCurrent build path: ${rootPath}, packageName: ${packageName.name} \n`,
+  `Current build path: ${rootPath}, packageName: ${packageName.name}`,
 );
 
 const buildEnv = {
@@ -39,14 +39,13 @@ const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
     modules: {
-      mode: 'local',
-      localsConvention: 'camelCaseOnly',
-      modules: __DEV__
+      localIdentName: __DEV__
         ? '[path][name]__[local]---[hash:base64:5]'
         : '[hash:base64:10]',
     },
     sourceMap: __DEV__,
     importLoaders: 2,
+    localsConvention: 'camelCaseOnly',
   },
 };
 
@@ -118,7 +117,7 @@ module.exports = {
             options: {
               // there should be 1 cpu for the fork-ts-checker-webpack-plugin
               workers: require('os').cpus().length - 1,
-              poolTimeout: Infinity, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
+              poolTimeout: __DEV__ ? Infinity : 2000, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
             },
           },
           {
@@ -176,21 +175,7 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'cache-loader', 'css-loader'],
-        include: [/node_modules/, buildEnv.src],
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'cache-loader', moduleCSSLoader, lessLoader],
-        exclude: NODE_MODULES_REG,
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'cache-loader', 'css-loader', lessLoader],
-        include: NODE_MODULES_REG,
-      },
+
       {
         test: /\.wasm$/,
         loader: 'wasm-loader',
@@ -213,6 +198,7 @@ module.exports = {
     jquery: '$',
   },
   extra: {
+    const: { NODE_MODULES_REG },
     moduleCSSLoader,
     lessLoader,
     buildEnv,

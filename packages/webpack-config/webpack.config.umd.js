@@ -1,6 +1,7 @@
 const path = require('path');
 
 const prodConfig = require('./webpack.config.prod');
+
 const rootPath = process.cwd();
 
 const plugins = [...prodConfig.plugins];

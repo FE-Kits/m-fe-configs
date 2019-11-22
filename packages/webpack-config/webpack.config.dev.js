@@ -1,18 +1,45 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const webpack = require('webpack');
 const path = require('path');
+
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
-const config = {
-  ...baseConfig,
+const {
+  NODE_MODULES_REG,
+  buildEnv,
+  moduleCSSLoader,
+  lessLoader,
+} = baseConfig.extra;
+
+delete baseConfig.extra;
+
+const config = merge(baseConfig, {
   mode: 'development',
   devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'cache-loader', 'css-loader'],
+        include: [NODE_MODULES_REG, buildEnv.src],
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'cache-loader', moduleCSSLoader, lessLoader],
+        exclude: NODE_MODULES_REG,
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'cache-loader', 'css-loader', lessLoader],
+        include: NODE_MODULES_REG,
+      },
+    ],
+  },
   plugins: [
-    ...baseConfig.plugins,
-
     // 在控制台中输出可读的模块名
     new webpack.NamedModulesPlugin(),
 
@@ -56,8 +83,6 @@ const config = {
   stats: {
     children: false,
   },
-};
-
-delete config.extra;
+});
 
 module.exports = config;

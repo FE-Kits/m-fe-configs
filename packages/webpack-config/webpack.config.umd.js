@@ -1,47 +1,52 @@
 const path = require('path');
 
-const prodConfig = require('./webpack.config.prod');
+module.exports = ({ rootPath, cacheId, primaryColor, title } = {}) => {
+  const prodConfig = require('./webpack.config.prod')({
+    rootPath,
+    cacheId,
+    primaryColor,
+    title,
+  });
 
-const rootPath = process.cwd();
+  const plugins = [...prodConfig.plugins];
 
-const plugins = [...prodConfig.plugins];
+  // 移除 CopyWebpackPlugin 与 HtmlWebpackPlugin
+  plugins.pop();
+  plugins.pop();
+  plugins.pop();
 
-// 移除 CopyWebpackPlugin 与 HtmlWebpackPlugin
-plugins.pop();
-plugins.pop();
-plugins.pop();
-
-const umdConfig = {
-  ...prodConfig,
-  output: {
-    filename: '[name].js',
-    path: path.resolve(rootPath, './dist'),
-    // 默认不允许挂载在全局变量下
-    // library: library,
-    libraryTarget: 'umd',
-  },
-  externals: {
-    antd: 'antd',
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'React',
+  const umdConfig = {
+    ...prodConfig,
+    output: {
+      filename: '[name].js',
+      path: path.resolve(rootPath, './dist'),
+      // 默认不允许挂载在全局变量下
+      // library: library,
+      libraryTarget: 'umd',
     },
-    'react-dom': {
-      commonjs: 'react-dom',
-      commonjs2: 'react-dom',
-      amd: 'react-dom',
-      root: 'ReactDOM',
+    externals: {
+      antd: 'antd',
+      react: {
+        commonjs: 'react',
+        commonjs2: 'react',
+        amd: 'react',
+        root: 'React',
+      },
+      'react-dom': {
+        commonjs: 'react-dom',
+        commonjs2: 'react-dom',
+        amd: 'react-dom',
+        root: 'ReactDOM',
+      },
+      'styled-components': {
+        commonjs: 'styled-components',
+        commonjs2: 'styled-components',
+      },
     },
-    'styled-components': {
-      commonjs: 'styled-components',
-      commonjs2: 'styled-components',
-    },
-  },
-  plugins,
+    plugins,
+  };
+
+  delete umdConfig.optimization;
+
+  return umdConfig;
 };
-
-delete umdConfig.optimization;
-
-module.exports = umdConfig;

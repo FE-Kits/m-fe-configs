@@ -8,6 +8,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
@@ -116,6 +118,8 @@ const config = {
       mobile: true,
       scripts: ['./static.js'],
     }),
+    new HtmlWebpackHarddiskPlugin(),
+    new HtmlWebpackInlineSourcePlugin(),
   ],
 
   optimization: {

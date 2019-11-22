@@ -8,17 +8,18 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const RewriteImportPlugin = require('less-plugin-rewrite-import');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const rootPath = process.cwd();
 
+const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const hashType = __DEV__ ? 'hash' : 'contenthash';
 const packageName = require(path.resolve(rootPath, 'package.json'));
 
-console.log(`Current build path: ${rootPath}, packageName: ${packageName}`);
+console.log(
+  `Current build path: ${rootPath}, packageName: ${packageName.name}`,
+);
 
 const buildEnv = {
   rootPath,
@@ -110,13 +111,20 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)?$/,
-        use: ['cache-loader', 'thread-loader', 'awesome-typescript-loader'],
-        options: {
-          cacheDirectory: true,
-          getCustomTransformers: () => ({
-            before: [tsImportPluginFactory(/** options */)],
-          }),
-        },
+        use: [
+          'cache-loader',
+          'thread-loader',
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              useCache: true,
+              getCustomTransformers: () => ({
+                before: [tsImportPluginFactory(/** options */)],
+              }),
+            },
+          },
+        ],
+
         exclude: NODE_MODULES_REG,
       },
       {
@@ -163,17 +171,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'cache-loader', 'css-loader'],
         include: [/node_modules/, buildEnv.src],
       },
       {
         test: /\.less$/,
-        use: ['style-loader', moduleCSSLoader, lessLoader],
+        use: ['style-loader', 'cache-loader', moduleCSSLoader, lessLoader],
         exclude: NODE_MODULES_REG,
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', lessLoader],
+        use: ['style-loader', 'cache-loader', 'css-loader', lessLoader],
         include: NODE_MODULES_REG,
       },
       {
@@ -190,8 +198,6 @@ module.exports = {
     }),
     new webpack.WatchIgnorePlugin([/less\.d\.ts$/]),
     new webpack.IgnorePlugin(/\.js\.map$/),
-    new HtmlWebpackHarddiskPlugin(),
-    new HtmlWebpackInlineSourcePlugin(),
   ],
 
   // 定义非直接引用依赖，使用方式即为 var $ = require("jquery")

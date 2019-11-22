@@ -169,7 +169,11 @@ module.exports = {
         oneOf: [
           {
             issuer: /\.[jt]sx?$/,
-            loader: '@svgr/webpack',
+            use: [
+              {
+                loader: 'svg-inline-loader',
+              },
+            ],
           },
           {
             loader: 'url-loader',

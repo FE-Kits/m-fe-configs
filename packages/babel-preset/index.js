@@ -1,23 +1,20 @@
-/* eslint-disable node/no-extraneous-require */
-const { declare } = require('@babel/helper-plugin-utils')
+/* eslint-disable sonarjs/cognitive-complexity */
+const { declare } = require('@babel/helper-plugin-utils');
+const { tryRequirePkg } = require('@pkgr/utils');
 
 const DEFAULT_ANTD_OPTIONS = {
   libraryName: 'antd',
   style: true,
-}
-
-const DEFAULT_ANTD_MOBILE_OPTIONS = {
-  libraryName: 'antd-mobile',
-  style: true,
-}
+};
 
 module.exports = declare(
   (
     api,
     {
-      generator,
+      async = 'fast',
       import: importOptions,
       modules = false,
+      esmodules,
       react,
       typescript,
       vue,
@@ -29,18 +26,18 @@ module.exports = declare(
       decoratorsBeforeExport = decoratorsLegacy === true ? undefined : true,
     },
   ) => {
-    api.assertVersion(7)
+    api.assertVersion(7);
 
-    const isDev = api.env('development')
-    const isProd = api.env('production')
+    const isDev = api.env('development');
+    const isProd = api.env('production');
 
-    const proposalTypeScriptPreset = require('babel-preset-proposal-typescript')
+    const proposalTypeScriptPreset = require('babel-preset-proposal-typescript');
 
     const proposalTsOptions = Object.assign({
       classLoose,
       decoratorsLegacy,
       isTSX,
-    })
+    });
 
     const presets = [
       [proposalTypeScriptPreset, proposalTsOptions],
@@ -48,20 +45,24 @@ module.exports = declare(
         require('@babel/preset-env'),
         {
           modules,
-          exclude: generator
-            ? undefined
-            : [
-                '@babel/transform-async-to-generator',
-                '@babel/transform-regenerator',
-              ],
+          exclude:
+            async === 'generator'
+              ? undefined
+              : [
+                  '@babel/transform-async-to-generator',
+                  '@babel/transform-regenerator',
+                ],
           corejs: {
             version: 3,
             proposals: true,
           },
+          targets: {
+            esmodules,
+          },
           useBuiltIns,
         },
       ],
-    ]
+    ];
 
     if (typescript) {
       presets.push([
@@ -70,27 +71,27 @@ module.exports = declare(
           isTSX,
           allExtensions: isTSX,
         },
-      ])
+      ]);
     }
 
     const plugins = [
       [
-        '@babel/plugin-proposal-decorators',
+        require('@babel/plugin-proposal-decorators'),
         {
           decoratorsBeforeExport,
           legacy: decoratorsLegacy,
         },
       ],
       [
-        '@babel/plugin-proposal-class-properties',
+        require('@babel/plugin-proposal-class-properties'),
         {
           loose: classLoose,
         },
       ],
-    ]
+    ];
 
     if (metadata) {
-      plugins.unshift(require('babel-plugin-transform-typescript-metadata'))
+      plugins.unshift(require('babel-plugin-transform-typescript-metadata'));
     }
 
     if (isProd) {
@@ -99,25 +100,28 @@ module.exports = declare(
         {
           exclude: ['error', 'warn'],
         },
-      ])
+      ]);
     }
 
-    if (!generator) {
+    if (async === 'fast') {
       plugins.push([
         require('fast-async'),
         {
           useRuntimeModule: true,
         },
-      ])
+      ]);
+    } else if (async === 'promises') {
+      plugins.push(require('babel-plugin-transform-async-to-promises'));
     }
 
     if (importOptions) {
-      const importPlugin = require('babel-plugin-import')
+      const importPlugin = require('babel-plugin-import');
       if (importOptions === true) {
-        plugins.push([importPlugin, DEFAULT_ANTD_OPTIONS])
-        plugins.push([importPlugin, DEFAULT_ANTD_MOBILE_OPTIONS])
+        plugins.push([importPlugin, DEFAULT_ANTD_OPTIONS]);
       } else if (Array.isArray(importOptions)) {
-        plugins.push([importPlugin, DEFAULT_ANTD_OPTIONS].concat(importOptions))
+        plugins.push(
+          [importPlugin, DEFAULT_ANTD_OPTIONS].concat(importOptions),
+        );
       } else {
         plugins.push(
           [
@@ -128,22 +132,16 @@ module.exports = declare(
             },
           ],
           ...(importOptions.plugins || []),
-        )
+        );
       }
     }
-
-    let reactHotLoaderAvailable = false
-
-    try {
-      reactHotLoaderAvailable = !!require.resolve('react-hot-loader/babel')
-    } catch (e) {}
 
     const reactPreset = [
       require('@babel/preset-react'),
       {
         development: isDev,
       },
-    ]
+    ];
     const reactPlugin = isProd
       ? [
           require('babel-plugin-transform-react-remove-prop-types'),
@@ -151,23 +149,23 @@ module.exports = declare(
             removeImport: true,
           },
         ]
-      : isDev && reactHotLoaderAvailable && require('react-hot-loader/babel')
+      : isDev && tryRequirePkg('react-hot-loader/babel');
 
     if (react) {
-      presets.push(reactPreset)
+      presets.push(reactPreset);
 
       if (reactPlugin) {
-        plugins.push(reactPlugin)
+        plugins.push(reactPlugin);
       }
     }
 
     if (vue) {
-      presets.push('@vue/babel-preset-jsx')
+      presets.push('@vue/babel-preset-jsx');
     }
 
     return {
-      plugins,
       presets,
+      plugins,
       overrides: isTSX
         ? undefined
         : [
@@ -182,6 +180,6 @@ module.exports = declare(
               plugins: reactPlugin ? [reactPlugin] : undefined,
             },
           ],
-    }
+    };
   },
-)
+);

@@ -203,7 +203,7 @@ module.exports = {
     jquery: '$',
   },
   extra: {
-    const: { NODE_MODULES_REG },
+    NODE_MODULES_REG,
     moduleCSSLoader,
     lessLoader,
     buildEnv,

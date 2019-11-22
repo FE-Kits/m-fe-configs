@@ -1,6 +1,6 @@
 {
   "name": "@wx-fc/webpack-config",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Shareable Browserslist Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@types/webpack-merge": "^4.1.5",
+    "antd": "^3.25.2",
     "cross-env": "^6.0.3"
   },
   "publishConfig": {

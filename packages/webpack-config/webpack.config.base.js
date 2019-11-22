@@ -14,7 +14,6 @@ const rootPath = process.cwd();
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
-const hashType = __DEV__ ? 'hash' : 'contenthash';
 const packageName = require(path.resolve(rootPath, 'package.json'));
 
 console.log(
@@ -85,9 +84,6 @@ module.exports = {
     plugins: [new TSConfigPathsPlugin()],
     alias: Object.assign(
       {
-        dayjs: 'dayjs/esm',
-        moment$: 'dayjs/esm',
-        systemjs$: 'systemjs/dist/system.js',
         '@': path.resolve(rootPath, './src/'),
       },
       __DEV__ && {
@@ -99,7 +95,7 @@ module.exports = {
     path: buildEnv.build,
     // 设置所有资源的默认公共路径，Webpack 会自动将 import 的资源改写为该路径
     publicPath: '/',
-    filename: `[name].[${hashType}].js`,
+    filename: `[name].js`,
     globalObject: 'this', // 避免全局使用 window
   },
   module: {

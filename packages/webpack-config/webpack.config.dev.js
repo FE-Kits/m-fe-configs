@@ -4,7 +4,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
+// const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
@@ -51,7 +51,7 @@ const config = merge(baseConfig, {
       __DEV__: JSON.stringify(true),
     }),
 
-    new LazyCompileWebpackPlugin(),
+    // new LazyCompileWebpackPlugin(),
   ],
   devServer: {
     clientLogLevel: 'warning',

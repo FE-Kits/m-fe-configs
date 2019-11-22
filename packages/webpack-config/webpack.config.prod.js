@@ -20,6 +20,7 @@ delete baseConfig.extra;
 const config = merge(baseConfig, {
   devtool: 'hidden-source-map',
   mode: 'production',
+  output: { filename: '[name].[contenthash].js' },
   module: {
     rules: [
       {

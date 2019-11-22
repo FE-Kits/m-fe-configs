@@ -18,7 +18,7 @@ const hashType = __DEV__ ? 'hash' : 'contenthash';
 const packageName = require(path.resolve(rootPath, 'package.json'));
 
 console.log(
-  `Current build path: ${rootPath}, packageName: ${packageName.name}`,
+  `\nCurrent build path: ${rootPath}, packageName: ${packageName.name} \n`,
 );
 
 const buildEnv = {
@@ -113,11 +113,18 @@ module.exports = {
         test: /\.(ts|tsx)?$/,
         use: [
           'cache-loader',
-          'thread-loader',
           {
-            loader: 'awesome-typescript-loader',
+            loader: 'thread-loader',
             options: {
-              useCache: true,
+              // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+              workers: require('os').cpus().length - 1,
+              poolTimeout: Infinity, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
+            },
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              happyPackMode: true,
               getCustomTransformers: () => ({
                 before: [tsImportPluginFactory(/** options */)],
               }),

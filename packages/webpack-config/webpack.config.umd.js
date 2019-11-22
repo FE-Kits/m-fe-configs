@@ -8,6 +8,7 @@ const plugins = [...prodConfig.plugins];
 // 移除 CopyWebpackPlugin 与 HtmlWebpackPlugin
 plugins.pop();
 plugins.pop();
+plugins.pop();
 
 const umdConfig = {
   ...prodConfig,

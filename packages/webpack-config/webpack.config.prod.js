@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
@@ -59,6 +58,10 @@ const config = {
   plugins: [
     ...baseConfig.plugins,
 
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(false),
+    }),
+
     new GenerateSW({
       cacheId: buildEnv.cacheId,
       runtimeCaching: [
@@ -71,10 +74,6 @@ const config = {
 
     new MiniCssExtractPlugin({
       filename: '[name].css',
-    }),
-
-    new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(false),
     }),
 
     // 使用 Prepack 优化包体大小
@@ -119,7 +118,6 @@ const config = {
       scripts: ['./static.js'],
     }),
     new HtmlWebpackHarddiskPlugin(),
-    new HtmlWebpackInlineSourcePlugin(),
   ],
 
   optimization: {

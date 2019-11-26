@@ -14,11 +14,9 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
 module.exports = ({ rootPath, primaryColor } = {}) => {
-  const packageName = require(path.resolve(rootPath, 'package.json'));
-
   const buildEnv = {
     rootPath,
-    packageName,
+
     src: path.resolve(rootPath, './src'),
     public: path.resolve(rootPath, './public'),
     build: path.resolve(rootPath, './build'),
@@ -150,22 +148,24 @@ module.exports = ({ rootPath, primaryColor } = {}) => {
             },
           ],
         },
-        {
-          test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-          oneOf: [
-            {
-              issuer: /\.[jt]sx?$/,
-              use: [
-                {
-                  loader: 'svg-inline-loader',
-                },
-              ],
-            },
-            {
-              loader: 'url-loader',
-            },
-          ],
-        },
+        // svg 的加载交于应用自身决定
+        // {
+        //   test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        //   oneOf: [
+        //     {
+        //       issuer: /\.[jt]sx?$/,
+        //       use: [
+        //         {
+        //           loader: '@svgr/webpack',
+        //           // loader: 'svg-inline-loader',
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       loader: 'url-loader',
+        //     },
+        //   ],
+        // },
 
         {
           test: /\.wasm$/,

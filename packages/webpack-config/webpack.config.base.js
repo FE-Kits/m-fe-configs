@@ -13,7 +13,7 @@ const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
-module.exports = ({ rootPath, primaryColor } = {}) => {
+module.exports = ({ rootPath, primaryColor, target } = {}) => {
   const buildEnv = {
     rootPath,
 
@@ -110,7 +110,17 @@ module.exports = ({ rootPath, primaryColor } = {}) => {
               options: {
                 happyPackMode: true,
                 getCustomTransformers: () => ({
-                  before: [tsImportPluginFactory(/** options */)],
+                  before: [
+                    tsImportPluginFactory(
+                      target === 'web'
+                        ? {
+                            libraryName: 'antd',
+                            libraryDirectory: 'lib',
+                            style: true,
+                          }
+                        : { libraryName: 'antd-mobile', style: 'css' },
+                    ),
+                  ],
                 }),
               },
             },
@@ -148,25 +158,6 @@ module.exports = ({ rootPath, primaryColor } = {}) => {
             },
           ],
         },
-        // svg 的加载交于应用自身决定
-        // {
-        //   test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        //   oneOf: [
-        //     {
-        //       issuer: /\.[jt]sx?$/,
-        //       use: [
-        //         {
-        //           loader: '@svgr/webpack',
-        //           // loader: 'svg-inline-loader',
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       loader: 'url-loader',
-        //     },
-        //   ],
-        // },
-
         {
           test: /\.wasm$/,
           loader: 'wasm-loader',

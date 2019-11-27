@@ -1,11 +1,12 @@
 const path = require('path');
 
-module.exports = ({ rootPath, cacheId, primaryColor, title } = {}) => {
+module.exports = ({ rootPath, cacheId, primaryColor, title, target } = {}) => {
   const prodConfig = require('./webpack.config.prod')({
     rootPath,
     cacheId,
     primaryColor,
     title,
+    target,
   });
 
   const plugins = [...prodConfig.plugins];

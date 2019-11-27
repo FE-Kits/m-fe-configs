@@ -1,10 +1,18 @@
 const path = require('path');
 
-module.exports = require('../../..')({
+const configMap = require('../../..')({
   rootPath: path.resolve(__dirname, '../../'),
   extendedBaseConfig: {
     entry: {
       index: path.resolve(__dirname, '../../src/index'),
+    },
+    module: {
+      rules: [
+        {
+          test: /.*ts-worker.*/,
+          use: ['workerize-loader', 'ts-loader'],
+        },
+      ],
     },
     resolve: {
       alias: {
@@ -15,3 +23,7 @@ module.exports = require('../../..')({
     },
   },
 });
+
+console.log(configMap.baseConfig.module.rules.length);
+
+module.exports = configMap;

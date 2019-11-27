@@ -4,10 +4,11 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 // const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
 
-module.exports = ({ rootPath, primaryColor } = {}) => {
+module.exports = ({ rootPath, primaryColor, target } = {}) => {
   const baseConfig = require('./webpack.config.base')({
     rootPath,
     primaryColor,
+    target,
   });
 
   const {

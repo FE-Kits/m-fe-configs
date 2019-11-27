@@ -2,6 +2,8 @@ const merge = require('webpack-merge');
 
 module.exports = ({
   rootPath = process.cwd(),
+  // target 可以为 web, mobile, server, rn, taro 等
+  target = 'web',
   cacheId = 'cacheId',
   primaryColor = '#5d4bff',
   title = 'Awesome App',
@@ -16,6 +18,7 @@ module.exports = ({
         cacheId,
         primaryColor,
         title,
+        target,
       }),
       extendedBaseConfig,
     ),
@@ -25,6 +28,7 @@ module.exports = ({
         cacheId,
         primaryColor,
         title,
+        target,
       }),
       extendedBaseConfig,
     ),
@@ -34,6 +38,7 @@ module.exports = ({
         cacheId,
         primaryColor,
         title,
+        target,
       }),
       extendedBaseConfig,
     ),
@@ -43,6 +48,7 @@ module.exports = ({
         cacheId,
         primaryColor,
         title,
+        target,
       }),
       extendedBaseConfig,
     ),

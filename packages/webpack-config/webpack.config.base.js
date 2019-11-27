@@ -5,7 +5,6 @@ const process = require('process');
 
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const tsImportPluginFactory = require('ts-import-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const RewriteImportPlugin = require('less-plugin-rewrite-import');
 
@@ -40,7 +39,7 @@ module.exports = ({ rootPath, primaryColor, target } = {}) => {
     loader: 'less-loader',
     options: {
       modifyVars: {
-        'primary-color': primaryColor,
+        '@primary-color': primaryColor,
       },
       javascriptEnabled: true,
       sourceMap: __DEV__,
@@ -93,39 +92,17 @@ module.exports = ({ rootPath, primaryColor, target } = {}) => {
           use: ['workerize-loader', 'ts-loader'],
         },
         {
-          test: /\.(ts|tsx)?$/,
+          test: /\.[jt]sx?$/,
           use: [
             'cache-loader',
+            'thread-loader',
             {
-              loader: 'thread-loader',
+              loader: 'babel-loader',
               options: {
-                // there should be 1 cpu for the fork-ts-checker-webpack-plugin
-                workers: require('os').cpus().length - 1,
-                // eslint-disable-next-line no-magic-numbers
-                poolTimeout: __DEV__ ? Infinity : 2000, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
-              },
-            },
-            {
-              loader: 'ts-loader',
-              options: {
-                happyPackMode: true,
-                getCustomTransformers: () => ({
-                  before: [
-                    tsImportPluginFactory(
-                      target === 'web'
-                        ? {
-                            libraryName: 'antd',
-                            libraryDirectory: 'lib',
-                            style: true,
-                          }
-                        : { libraryName: 'antd-mobile', style: 'css' },
-                    ),
-                  ],
-                }),
+                cacheDirectory: true,
               },
             },
           ],
-
           exclude: NODE_MODULES_REG,
         },
         {

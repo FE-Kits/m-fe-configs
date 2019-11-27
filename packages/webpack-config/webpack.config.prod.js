@@ -11,13 +11,10 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
-module.exports = ({ rootPath, cacheId, title, primaryColor, target } = {}) => {
-  const baseConfig = require('./webpack.config.base')({
-    rootPath,
-    primaryColor,
-    target,
-  });
-
+module.exports = (
+  baseConfig,
+  { rootPath, cacheId, title, primaryColor, target } = {},
+) => {
   const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
 
   delete baseConfig.extra;

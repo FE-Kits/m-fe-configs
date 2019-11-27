@@ -1,14 +1,9 @@
 const path = require('path');
 
-module.exports = ({ rootPath, cacheId, primaryColor, title, target } = {}) => {
-  const prodConfig = require('./webpack.config.prod')({
-    rootPath,
-    cacheId,
-    primaryColor,
-    title,
-    target,
-  });
-
+module.exports = (
+  prodConfig,
+  { rootPath, cacheId, primaryColor, title, target } = {},
+) => {
   const plugins = [...prodConfig.plugins];
 
   // 移除 CopyWebpackPlugin 与 HtmlWebpackPlugin

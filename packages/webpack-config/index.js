@@ -11,46 +11,54 @@ module.exports = ({
 } = {}) => {
   console.log(`\nCurrent build path: ${rootPath}\n`);
 
+  const baseConfig = merge(
+    require('./webpack.config.base')({
+      rootPath,
+      cacheId,
+      primaryColor,
+      title,
+      target,
+    }),
+    extendedBaseConfig,
+  );
+
+  const devConfig = require('./webpack.config.dev')(
+    { ...baseConfig },
+    {
+      rootPath,
+      cacheId,
+      primaryColor,
+      title,
+      target,
+    },
+  );
+
+  const prodConfig = require('./webpack.config.prod')(
+    { ...baseConfig },
+    {
+      rootPath,
+      cacheId,
+      primaryColor,
+      title,
+      target,
+    },
+  );
+
+  const umdConfig = require('./webpack.config.umd')(
+    { ...prodConfig },
+    {
+      rootPath,
+      cacheId,
+      primaryColor,
+      title,
+      target,
+    },
+  );
+
   return {
-    baseConfig: merge(
-      require('./webpack.config.base')({
-        rootPath,
-        cacheId,
-        primaryColor,
-        title,
-        target,
-      }),
-      extendedBaseConfig,
-    ),
-    devConfig: merge(
-      require('./webpack.config.dev')({
-        rootPath,
-        cacheId,
-        primaryColor,
-        title,
-        target,
-      }),
-      extendedBaseConfig,
-    ),
-    prodConfig: merge(
-      require('./webpack.config.prod')({
-        rootPath,
-        cacheId,
-        primaryColor,
-        title,
-        target,
-      }),
-      extendedBaseConfig,
-    ),
-    umdConfig: merge(
-      require('./webpack.config.umd')({
-        rootPath,
-        cacheId,
-        primaryColor,
-        title,
-        target,
-      }),
-      extendedBaseConfig,
-    ),
+    baseConfig,
+    devConfig,
+    prodConfig,
+    umdConfig,
   };
 };

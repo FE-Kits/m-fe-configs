@@ -13,7 +13,7 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = (
   baseConfig,
-  { rootPath, cacheId, title, primaryColor, target } = {},
+  { rootPath, cacheId, title, themeVars, target } = {},
 ) => {
   const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
 

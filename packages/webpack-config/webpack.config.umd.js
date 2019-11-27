@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = (
   prodConfig,
-  { rootPath, cacheId, primaryColor, title, target } = {},
+  { rootPath, cacheId, themeVars, title, target } = {},
 ) => {
   const plugins = [...prodConfig.plugins];
 

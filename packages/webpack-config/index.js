@@ -5,7 +5,7 @@ module.exports = ({
   // target 可以为 web, mobile, server, rn, taro 等
   target = 'web',
   cacheId = 'cacheId',
-  primaryColor = '#5d4bff',
+  themeVars = {},
   title = 'Awesome App',
   extendedBaseConfig = {},
 } = {}) => {
@@ -15,7 +15,7 @@ module.exports = ({
     require('./webpack.config.base')({
       rootPath,
       cacheId,
-      primaryColor,
+      themeVars,
       title,
       target,
     }),
@@ -27,7 +27,7 @@ module.exports = ({
     {
       rootPath,
       cacheId,
-      primaryColor,
+      themeVars,
       title,
       target,
     },
@@ -38,7 +38,7 @@ module.exports = ({
     {
       rootPath,
       cacheId,
-      primaryColor,
+      themeVars,
       title,
       target,
     },
@@ -49,7 +49,7 @@ module.exports = ({
     {
       rootPath,
       cacheId,
-      primaryColor,
+      themeVars,
       title,
       target,
     },

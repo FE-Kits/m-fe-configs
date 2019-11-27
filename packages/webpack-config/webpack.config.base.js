@@ -12,7 +12,7 @@ const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
-module.exports = ({ rootPath, primaryColor, target } = {}) => {
+module.exports = ({ rootPath, themeVars, target } = {}) => {
   const buildEnv = {
     rootPath,
 
@@ -39,7 +39,7 @@ module.exports = ({ rootPath, primaryColor, target } = {}) => {
     loader: 'less-loader',
     options: {
       modifyVars: {
-        '@primary-color': primaryColor,
+        ...themeVars,
       },
       javascriptEnabled: true,
       sourceMap: __DEV__,

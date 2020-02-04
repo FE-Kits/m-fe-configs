@@ -2,12 +2,12 @@ const merge = require('webpack-merge');
 
 module.exports = ({
   rootPath = process.cwd(),
-  // target 可以为 web, mobile, server, rn, taro 等
-  target = 'web',
+  target = 'web', // target 可以为 web, mobile, server, rn, taro 等
   cacheId = 'cacheId',
   themeVars = {},
   title = 'Awesome App',
   extendedBaseConfig = {},
+  htmlWebpackPluginOptions = {},
 } = {}) => {
   console.log(`\nCurrent build path: ${rootPath}\n`);
 
@@ -41,6 +41,7 @@ module.exports = ({
       themeVars,
       title,
       target,
+      htmlWebpackPluginOptions,
     },
   );
 

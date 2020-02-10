@@ -12,17 +12,17 @@
 
 ## 关联项目
 
-- [fe-boilerplates](https://github.com/wx-chevalier/fe-boilerplates): Lucid & Futuristic Production Boilerplates For Frontend(Web) Apps, React/RN/Vue, with TypeScript(Optional), Webpack 4/Parcel, MobX/Redux :dizzy: 多技术栈前端项目模板
+- [m-fe-configs](https://github.com/wx-chevalier/m-fe-configs)：Common Dev Configs(ESLint, Prettier, Husky, etc.) for Micro-Frontend Apps
 
-- [@wx-fc/configs](https://github.com/wx-chevalier/m-fe-configs)：Common Dev Configs(ESLint, Prettier, Husky, etc.) for Micro-Frontend Apps
+- [m-fe-rtw](https://github.com/wx-chevalier/m-fe-rtw): Micro-Frontend boilerplate with React & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
+
+- [m-fe-vtw](https://github.com/wx-chevalier/m-fe-vtw): Micro-Frontend boilerplate with Vue & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
+
+--
 
 - [react-snippets](https://github.com/wx-chevalier/react-snippets): React Snippets(.ts/.tsx), about design patterns/techniques used while developing with React and TypeScript.
 
-- [@wx-fc/rtw](https://github.com/wx-chevalier/@wx-fc/rtw): Micro-Frontend boilerplate with React & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
-
 - [vue-snippets](https://github.com/wx-chevalier/vue-snippets): Vue Snippets(.js/.ts), about design patterns/techniques used while developing with Vue and JavaScript/TypeScript.
-
-- [@wx-fc/vtw](https://github.com/wx-chevalier/@wx-fc/vtw): Micro-Frontend boilerplate with Vue & TypeScript & Webpack, for complicated cooperative applications. | 微前端项目模板
 
 - [fractal-components](https://github.com/wx-chevalier/fractal-components): Massive Fractal Components in Several Libraries(Vanilla, React, Vue, Weapp), for building your great apps easily again
 

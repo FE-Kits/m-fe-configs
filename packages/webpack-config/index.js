@@ -6,6 +6,8 @@ module.exports = ({
   cacheId = 'cacheId',
   themeVars = {},
   title = 'Awesome App',
+  useCssModule = true,
+
   extendedBaseConfig = {},
   htmlWebpackPluginOptions = {},
 } = {}) => {
@@ -18,6 +20,7 @@ module.exports = ({
       themeVars,
       title,
       target,
+      useCssModule,
     }),
     extendedBaseConfig,
   );

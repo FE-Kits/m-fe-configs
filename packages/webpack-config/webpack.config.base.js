@@ -12,7 +12,7 @@ const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
-module.exports = ({ rootPath, themeVars, target } = {}) => {
+module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
   const buildEnv = {
     rootPath,
 
@@ -24,11 +24,13 @@ module.exports = ({ rootPath, themeVars, target } = {}) => {
   const moduleCSSLoader = {
     loader: 'css-loader',
     options: {
-      modules: {
-        localIdentName: __DEV__
-          ? '[path][name]__[local]---[hash:base64:5]'
-          : '[hash:base64:10]',
-      },
+      modules: useCssModule
+        ? {
+            localIdentName: __DEV__
+              ? '[path][name]__[local]---[hash:base64:5]'
+              : '[hash:base64:10]',
+          }
+        : false,
       sourceMap: __DEV__,
       importLoaders: 2,
       localsConvention: 'camelCaseOnly',

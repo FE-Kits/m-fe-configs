@@ -1,26 +1,18 @@
-const path = require('path');
+const { isPkgAvailable, tryFile } = require('@pkgr/utils');
 
 const config = Object.assign({}, require('./base'));
 
-let eslint = false;
+if (isPkgAvailable('eslint')) {
+  Object.assign(
+    config,
+    {
+      '*.{js,jsx,md,mdx,mjs,vue}': ['eslint --cache -f friendly --fix'],
+    },
+    require('./ts-eslint'),
+  );
+}
 
-try {
-  require.resolve('eslint');
-  eslint = true;
-} catch (e) {}
-
-let tslint;
-
-try {
-  require.resolve(path.resolve('tslint.json'));
-  tslint = true;
-} catch (e) {}
-
-if (eslint && tslint) {
-  Object.assign(config, require('./ts-eslint'), require('./ts-tslint'));
-} else if (eslint) {
-  Object.assign(config, require('./ts-eslint'));
-} else if (tslint) {
+if (isPkgAvailable('tslint') && tryFile('tslint.json')) {
   Object.assign(config, require('./ts-tslint'));
 }
 

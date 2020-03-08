@@ -1,30 +1,23 @@
-let isStylelintAvailable;
-
-try {
-  // eslint-disable-next-line node/no-extraneous-require
-  isStylelintAvailable = !!require.resolve('stylelint');
-} catch (e) {}
-
-let isImageminAvailable;
-
-try {
-  // eslint-disable-next-line node/no-extraneous-require
-  isImageminAvailable = !!require.resolve('@wx-fc/imagemin');
-} catch (e) {}
+/* eslint-disable sonarjs/no-duplicate-string */
+const { isPkgAvailable } = require('@pkgr/utils');
 
 const config = {
-  '.!(*browserslist|npm|yarn)rc': ['prettier --write', 'git add'],
-  '*.{js,jsx,md,mdx,mjs,vue}': ['eslint -f friendly --fix', 'git add'],
-  '*.{gql,html,json,pug,vue,toml,yaml,yml}': ['prettier --write', 'git add'],
-  '*.ts?(x)': () => 'tsc --noEmit'
+  '*.{*ignore,*sh,env,env.*,gql,html,json,properties,pug,rb,vue,toml,yaml,yml}': [
+    'prettier --write',
+  ],
+  '.!(*browserslist|npm|yarn)rc': ['prettier --write'],
+  '.{editorconfig|browserslistrc|npmrc|yarnrc}': [
+    'prettier --write --parser sh',
+  ],
+  Dockerfile: ['prettier --write'],
 };
 
-if (isStylelintAvailable) {
-  config['*.{css,less,sass,scss,vue}'] = ['stylelint --fix', 'git add'];
+if (isPkgAvailable('stylelint')) {
+  config['*.{css,less,sass,scss,vue}'] = ['stylelint --cache --fix'];
 }
 
-if (isImageminAvailable) {
-  config['*.{gif,jpeg,jpg,png,svg,webp}'] = ['i', 'git add'];
+if (isPkgAvailable('@pkgr/imagemin')) {
+  config['*.{gif,jpeg,jpg,png,svg,webp}'] = ['i'];
 }
 
 module.exports = config;

@@ -25,7 +25,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@wx-fc/app-config": "^0.1.36"
+    "@wx-fc/app-config": "^0.3.5"
   },
   "devDependencies": {
     "@angular/core": "^8.2.8",

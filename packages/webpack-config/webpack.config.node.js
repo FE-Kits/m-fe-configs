@@ -27,7 +27,7 @@ module.exports = ({ rootPath = process.cwd() } = {}) => {
     entry: {
       index: path.resolve(buildEnv.rootPath, './src/index.ts'),
     },
-    target: 'electron-main',
+    target: 'node',
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
       plugins: [new TSConfigPathsPlugin()],

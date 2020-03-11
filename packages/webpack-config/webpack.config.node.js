@@ -6,6 +6,7 @@ const process = require('process');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -26,6 +27,7 @@ module.exports = ({ rootPath = process.cwd() } = {}) => {
     entry: {
       index: path.resolve(buildEnv.rootPath, './src/index.ts'),
     },
+    target: 'electron-main',
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
       plugins: [new TSConfigPathsPlugin()],
@@ -70,5 +72,20 @@ module.exports = ({ rootPath = process.cwd() } = {}) => {
       }),
       new webpack.IgnorePlugin(/\.js\.map$/),
     ],
+    optimization: __DEV__
+      ? false
+      : {
+          runtimeChunk: false,
+          minimizer: [
+            new TerserPlugin({
+              exclude: /.*ts-worker.*/,
+              terserOptions: {
+                output: {
+                  comments: false,
+                },
+              },
+            }),
+          ],
+        },
   };
 };

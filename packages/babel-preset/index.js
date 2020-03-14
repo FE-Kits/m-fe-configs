@@ -15,6 +15,7 @@ module.exports = declare(
       import: importOptions,
       modules = false,
       esmodules,
+      customTargets = {},
       react,
       typescript,
       vue,
@@ -57,6 +58,7 @@ module.exports = declare(
             proposals: true,
           },
           targets: {
+            ...customTargets,
             esmodules,
           },
           useBuiltIns,

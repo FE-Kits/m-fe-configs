@@ -73,7 +73,9 @@ module.exports = ({ rootPath = process.cwd() } = {}) => {
       new webpack.IgnorePlugin(/\.js\.map$/),
     ],
     optimization: __DEV__
-      ? false
+      ? {
+          minimize: false,
+        }
       : {
           runtimeChunk: false,
           minimizer: [

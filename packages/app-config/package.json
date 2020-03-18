@@ -1,6 +1,6 @@
 {
   "name": "@wx-fc/app-config",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Shareable configuration for all micro-frontend projects.",
   "repository": "https://github.com/FE-Kits/m-fe-configs",
   "homepage": "https://github.com/FE-Kits/m-fe-configs",
@@ -35,7 +35,7 @@
     "@wx-fc/stylelint-config": "^0.0.7",
     "@wx-fc/tsconfig": "^0.0.3",
     "@wx-fc/tslint-config": "^0.0.2",
-    "@wx-fc/webpack-config": "^0.1.4",
+    "@wx-fc/webpack-config": "^0.1.5",
     "autoprefixer": "^9.7.4",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",

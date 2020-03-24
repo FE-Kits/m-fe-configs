@@ -4,14 +4,14 @@ set -ex
 cd ./packages
 
 for file in *; do
-    [ -d "$file" ] || continue
+	[ -d "$file" ] || continue
 
-    if [ "$file" == "config" ]; then
-        continue
-    fi
+	if [ "$file" == "config" ]; then
+		continue
+	fi
 
-    echo "cd $file";
-    cd ./$file
-    npm publish
-    cd ..
+	echo "cd $file"
+	cd ./$file
+	npm publish
+	cd ..
 done

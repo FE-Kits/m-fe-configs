@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/eslint-config",
+  "name": "@m-fe/eslint-config",
   "version": "0.0.8",
   "description": "Shareable ESLint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

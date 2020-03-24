@@ -1,6 +1,6 @@
-# @wx-fc/configs
+# @m-fe/configs
 
-@wx-fc/configs 是对于笔者通用前端项目中的配置项的统一提取。
+@m-fe/configs 是对于笔者通用前端项目中的配置项的统一提取。
 
 # TOC | 目录索引
 

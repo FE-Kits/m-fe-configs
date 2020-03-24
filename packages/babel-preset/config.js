@@ -1,3 +1,3 @@
 module.exports = {
-  presets: ['@wx-fc'],
+  presets: ['@m-fe'],
 };

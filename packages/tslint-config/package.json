@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/tslint-config",
+  "name": "@m-fe/tslint-config",
   "version": "0.0.2",
   "description": "Shareable TSLint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

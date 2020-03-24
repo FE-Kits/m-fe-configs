@@ -20,7 +20,7 @@ try {
   configFile =
     tryFile(BABEL_CONFIG) ||
     tryFile(BABEL_RC_CONFIG) ||
-    require.resolve('@wx-fc/babel-preset/config');
+    require.resolve('@m-fe/babel-preset/config');
 } catch (e) {}
 
 exports.js = {
@@ -55,7 +55,7 @@ const TS_CONFIGS = [
 let project;
 
 try {
-  project = TS_CONFIGS.length ? TS_CONFIGS : require.resolve('@wx-fc/tsconfig');
+  project = TS_CONFIGS.length ? TS_CONFIGS : require.resolve('@m-fe/tsconfig');
 } catch (e) {}
 
 const resolveSettings = {
@@ -266,7 +266,7 @@ const tslintConfigAvailable = fs.existsSync(TSLINT_CONFIG);
 let lintFile = tslintConfigAvailable ? TSLINT_CONFIG : undefined;
 
 try {
-  lintFile = lintFile || require.resolve('@wx-fc/tslint-config');
+  lintFile = lintFile || require.resolve('@m-fe/tslint-config');
 } catch (e) {}
 
 exports.tslint = {

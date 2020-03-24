@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/commitlint-config",
+  "name": "@m-fe/commitlint-config",
   "version": "0.0.2",
   "description": "Shareable Commitlint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

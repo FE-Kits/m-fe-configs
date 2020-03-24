@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/postcss-config",
+  "name": "@m-fe/postcss-config",
   "version": "0.0.3",
   "description": "Shareable PostCSS Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

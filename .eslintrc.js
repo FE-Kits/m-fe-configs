@@ -1,7 +1,7 @@
-const { allowModules } = require('@wx-fc/eslint-config/_util');
+const { allowModules } = require('@m-fe/eslint-config/_util');
 
 module.exports = {
-  extends: '@wx-fc/eslint-config/recommended',
+  extends: '@m-fe/eslint-config/recommended',
   settings: {
     node: {
       allowModules: allowModules.concat('tslint', 'typescript'),

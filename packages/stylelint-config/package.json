@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/stylelint-config",
+  "name": "@m-fe/stylelint-config",
   "version": "0.0.7",
   "description": "Shareable Stylelint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",

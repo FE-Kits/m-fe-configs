@@ -3571,6 +3571,27 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
+"@m-fe/babel-preset@^0.0.2":
+  version "0.0.3"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/plugin-proposal-class-properties" "^7.8.3"
+    "@babel/plugin-proposal-decorators" "^7.8.3"
+    "@babel/preset-env" "^7.8.4"
+    "@babel/preset-react" "^7.8.3"
+    "@babel/preset-typescript" "^7.8.3"
+    "@pkgr/utils" "^0.4.2"
+    "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
+    "@vue/babel-preset-jsx" "^1.1.2"
+    babel-plugin-import "^1.13.0"
+    babel-plugin-transform-async-to-promises "^0.8.15"
+    babel-plugin-transform-react-remove-prop-types "^0.4.24"
+    babel-plugin-transform-remove-console "^6.9.4"
+    babel-plugin-transform-typescript-metadata "^0.2.2"
+    babel-preset-proposal-typescript "^1.5.0"
+    core-js "^3.6.4"
+    fast-async "^7.0.6"
+
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"
@@ -4636,14 +4657,6 @@
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
-
-"@wx-fc/commitlint-config@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@wx-fc/commitlint-config/-/commitlint-config-0.0.1.tgz#93492ff76bceb04e4e5311d37dc7da7b90f47901"
-  integrity sha512-FE1KQMOFsmU3V8gW1kVKCZsRgrNW7oAZKs9CqkrgDiqttqkulIJ2/uzlNhqLrDXBdRZlo5w7LkkkXV7y5XA31w==
-  dependencies:
-    "@commitlint/config-conventional" "^8.2.0"
-    "@commitlint/config-lerna-scopes" "^8.2.0"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

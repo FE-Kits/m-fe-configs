@@ -1,5 +1,5 @@
 {
-  "name": "@wx-fc/configs",
+  "name": "@m-fe/configs",
   "version": "0.0.0",
   "description": "Shareable Configurations for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
@@ -25,7 +25,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@wx-fc/app-config": "^0.3.5"
+    "@m-fe/app-config": "^0.4.2"
   },
   "devDependencies": {
     "@angular/core": "^8.2.8",
@@ -58,19 +58,19 @@
   },
   "commitlint": {
     "extends": [
-      "@wx-fc"
+      "@m-fe"
     ]
   },
-  "prettier": "@wx-fc/prettier-config/semi",
+  "prettier": "@m-fe/prettier-config/semi",
   "remarkConfig": {
     "plugins": [
-      "@wx-fc/remark-config"
+      "@m-fe/remark-config"
     ]
   },
   "stylelint": {
     "extends": [
-      "@wx-fc/stylelint-config",
-      "@wx-fc/stylelint-config/modules"
+      "@m-fe/stylelint-config",
+      "@m-fe/stylelint-config/modules"
     ],
     "rules": {
       "font-family-no-missing-generic-family-keyword": null,

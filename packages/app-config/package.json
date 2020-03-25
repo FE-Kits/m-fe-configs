@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/app-config",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Shareable configuration for all micro-frontend projects.",
   "repository": "https://github.com/FE-Kits/m-fe-configs",
   "homepage": "https://github.com/FE-Kits/m-fe-configs",
@@ -11,7 +11,7 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@svgr/webpack": "^5.2.0",
+    "@svgr/webpack": "^5.3.0",
     "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.5",
     "@types/jest": "25.1.4",
@@ -35,16 +35,16 @@
     "@m-fe/stylelint-config": "^0.0.7",
     "@m-fe/tsconfig": "^0.0.3",
     "@m-fe/tslint-config": "^0.0.2",
-    "@m-fe/webpack-config": "^0.1.5",
-    "autoprefixer": "^9.7.4",
+    "@m-fe/webpack-config": "^0.1.6",
+    "autoprefixer": "^9.7.5",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
     "json-server": "0.16.1",
-    "lint-staged": "^10.0.8",
+    "lint-staged": "^10.0.9",
     "rimraf": "^3.0.2",
     "stylelint": "^13.2.1",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.0"
+    "webpack": "^4.42.1"
   },
   "publishConfig": {
     "access": "public"

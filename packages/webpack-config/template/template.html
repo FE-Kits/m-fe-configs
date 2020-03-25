@@ -1,0 +1,191 @@
+<% htmlWebpackPlugin.options.publicPath = htmlWebpackPlugin.options.publicPath || '' %>
+<html lang="zh-Hans-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>Template</title>
+
+  <%
+  for (key in htmlWebpackPlugin.files.css) { %><%
+    if (htmlWebpackPlugin.files.cssIntegrity) { %>
+  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet"
+    integrity="<%= htmlWebpackPlugin.files.cssIntegrity[key] %>"
+    crossorigin="<%= webpackConfig.output.crossOriginLoading %>" /><%
+    } else { %>
+  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet" /><%
+    } %><%
+  }
+  %>
+
+  <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+  <script src="https://unpkg.com/es7-object-polyfill"></script>
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function () {
+        FastClick.attach(document.body);
+      }, false);
+    }
+    if (!window.Promise) {
+      document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' +
+        '>' + '<' + '/' + 'script>');
+    }
+
+  </script>
+
+  <style>
+    #root,
+    body,
+    html {
+      height: 100%
+    }
+
+    .async_script {
+      display: none
+    }
+
+    .loader,
+    .loader:after,
+    .loader:before {
+      background: #ed8c3d;
+      -webkit-animation: load1 1s infinite ease-in-out;
+      animation: load1 1s infinite ease-in-out;
+      width: 1em;
+      height: 4em
+    }
+
+    .loader {
+      top: 35%;
+      color: #fff;
+      text-indent: -9999em;
+      margin: 88px auto;
+      position: relative;
+      font-size: 11px;
+      -webkit-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-animation-delay: -.16s;
+      animation-delay: -.16s
+    }
+
+    .loader:after,
+    .loader:before {
+      position: absolute;
+      top: 0;
+      content: ''
+    }
+
+    .loader:before {
+      left: -1.5em;
+      -webkit-animation-delay: -.32s;
+      animation-delay: -.32s
+    }
+
+    .loader:after {
+      left: 1.5em
+    }
+
+    @-webkit-keyframes load1 {
+
+      0%,
+      100%,
+      80% {
+        box-shadow: 0 0;
+        height: 4em
+      }
+
+      40% {
+        box-shadow: 0 -2em;
+        height: 5em
+      }
+    }
+
+    @keyframes load1 {
+
+      0%,
+      100%,
+      80% {
+        box-shadow: 0 0;
+        height: 4em
+      }
+
+      40% {
+        box-shadow: 0 -2em;
+        height: 5em
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="root" style="width:100%;height:100%;">
+    <div class="loader" />
+  </div>
+</body>
+
+<script>
+  function loadScript(src, cb) {
+    //创建一个script元素
+    var el = document.createElement('script');
+    var loaded = false;
+    //设置加载完成的回调事件
+    el.onload = el.onreadystatechange = function () {
+      //防止重复加载
+      if ((el.readyState && el.readyState !== 'complete' && el.readyState !== 'loaded') || loaded) {
+        return false;
+      }
+      //加载完成后将该脚本的onload设置为null
+      el.onload = el.onreadystatechange = null;
+      loaded = true;
+      cb && cb();
+    };
+    el.async = true;
+    el.src = src;
+    var body = document.getElementsByTagName('body')[0];
+    body.appendChild(el);
+  }
+
+  window.onload = function () {
+    var scripts = [];
+    [].forEach.call(document.getElementsByClassName('async_script'), function (a) {
+      scripts.push(a.getAttribute('href'));
+    });
+    for (var i = 0; i < scripts.length; i++) {
+      (function (j) {
+        setTimeout(function () {
+          loadScript(scripts[j]);
+        }, j * 500);
+      }(i));
+    }
+  }
+
+</script>
+
+<!-- 自定义 JS 脚本 -->
+<%
+    for (item of htmlWebpackPlugin.options.scripts) { %><%
+      if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
+<script<% for (key in item) { %> <%= key %>="<%= item[key] %>" <% } %>>
+  </script><%
+    }
+%>
+
+  <!-- Chunks -->
+  <%
+for (key in htmlWebpackPlugin.files.js) { %><%
+  if (htmlWebpackPlugin.files.jsIntegrity) { %>
+  <script src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key] %>" type="text/javascript"
+    integrity="<%= htmlWebpackPlugin.files.jsIntegrity[htmlWebpackPlugin.files.js.indexOf(htmlWebpackPlugin.files.chunks[key].entry)] %>"
+    crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script><%
+  } else { %>
+  <script src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key] %>"
+    type="text/javascript"></script><%
+  } %><%
+}
+
+%>
+
+</html>

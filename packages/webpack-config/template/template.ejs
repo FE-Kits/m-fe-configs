@@ -44,8 +44,9 @@
     for (item of htmlWebpackPlugin.options.links) { %><%
       if (typeof item === 'string' || item instanceof String) { item = { href: item, rel: 'stylesheet' } } %>
     <link<% for (key in item) { %> <%= key %>="<%= item[key] %>" <% } %> /><%
-    } %><%
+    } %>
 
+    <%
     for (key in htmlWebpackPlugin.files.css) { %><%
       if (htmlWebpackPlugin.files.cssIntegrity) { %>
     <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet"
@@ -54,7 +55,10 @@
       } else { %>
     <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet" /><%
       } %><%
-    } %><%
+    } %>
+
+
+    <%
     if (htmlWebpackPlugin.options.headHtmlSnippet) { %>
     <%= htmlWebpackPlugin.options.headHtmlSnippet %><%
     } %>
@@ -201,13 +205,18 @@
 
     if (htmlWebpackPlugin.options.inlineManifestWebpackName) { %>
   <%= htmlWebpackPlugin.files[htmlWebpackPlugin.options.inlineManifestWebpackName] %><%
-    } %><%
+    } %>
+
+  <%
 
     for (item of htmlWebpackPlugin.options.scripts) { %><%
       if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
   <script<% for (key in item) { %> <%= key %>="<%= item[key] %>" <% } %>>
     </script><%
-    } %><%
+    } %>
+
+
+    <%
 
     for (key in htmlWebpackPlugin.files.chunks) { %><%
       if (htmlWebpackPlugin.files.jsIntegrity) { %>

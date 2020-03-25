@@ -7,13 +7,44 @@ const configMap = require('../../..')({
     entry: {
       index: path.resolve(__dirname, '../../src/index'),
     },
+    output: {
+      publicPath: './',
+    },
     resolve: {
       alias: {
         dayjs: 'dayjs/esm',
-        // moment$: 'dayjs/esm',
+        moment$: 'dayjs/esm',
         systemjs$: 'systemjs/dist/system.js',
       },
     },
+    module: {
+      rules: [
+        {
+          test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+          oneOf: [
+            {
+              issuer: /\.[jt]sx?$/,
+              use: [
+                {
+                  loader: '@svgr/webpack',
+                  // loader: 'svg-inline-loader',
+                },
+              ],
+            },
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10,
+                name: 'images/[name].[ext]',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  htmlWebpackPluginOptions: {
+    scripts: ['a.js'],
   },
 });
 

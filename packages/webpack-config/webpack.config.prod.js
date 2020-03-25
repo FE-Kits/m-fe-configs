@@ -22,7 +22,10 @@ module.exports = (
   const config = merge(baseConfig, {
     devtool: false,
     mode: 'production',
-    output: { filename: '[name].[contenthash].js' },
+    output: {
+      ...baseConfig.output,
+      filename: '[name].[contenthash].js',
+    },
     module: {
       rules: [
         {
@@ -82,7 +85,7 @@ module.exports = (
       new CopyWebpackPlugin([{ from: buildEnv.public, to: buildEnv.build }]),
 
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, './template/template.ejs'),
+        template: path.join(__dirname, './template/template.html'),
         title: title,
         favicon: path.join(buildEnv.public, 'favicon.ico'),
         manifest: path.join(buildEnv.public, 'manifest.json'),
@@ -97,9 +100,11 @@ module.exports = (
         appMountIds: ['root'],
         minify: true,
         mobile: true,
+        inject: false,
         alwaysWriteToDisk: true,
         inlineSource: /(^|[\\/])manifest\.\w+\.js$/,
         scripts: [],
+        publicPath: baseConfig.output.publicPath,
         ...htmlWebpackPluginOptions,
       }),
       new HtmlWebpackHarddiskPlugin(),

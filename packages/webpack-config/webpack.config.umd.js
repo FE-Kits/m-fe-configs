@@ -14,6 +14,7 @@ module.exports = (
   const umdConfig = {
     ...prodConfig,
     output: {
+      ...prodConfig.output,
       filename: '[name].js',
       path: path.resolve(rootPath, './dist'),
       // 默认不允许挂载在全局变量下

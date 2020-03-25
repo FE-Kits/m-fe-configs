@@ -1,12 +1,12 @@
 {
   "name": "@m-fe/webpack-config",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Shareable Webpack Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config ./example/scripts/webpack/webpack.config.prod.js -p",
+    "build": "rm -rf example/build && cross-env NODE_ENV=production webpack --config ./example/scripts/webpack/webpack.config.prod.js -p",
     "build:node": "rm -rf ./example-node/build && cross-env NODE_ENV=production webpack --config ./example-node/webpack.config.js -p --progress",
     "dev": "webpack-dev-server --config ./example/scripts/webpack/webpack.config.dev.js --hot --progress",
     "dev:node": "webpack --config ./example-node/webpack.config.js --watch --progress"

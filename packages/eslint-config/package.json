@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/eslint-config",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Shareable ESLint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@pkgr/utils": "^0.3.3",
-    "@typescript-eslint/eslint-plugin": "^2.7.0",
-    "@typescript-eslint/eslint-plugin-tslint": "^2.7.0",
-    "@typescript-eslint/parser": "^2.7.0",
+    "@typescript-eslint/eslint-plugin": "2.23.0",
+    "@typescript-eslint/eslint-plugin-tslint": "2.23.0",
+    "@typescript-eslint/parser": "2.23.0",
     "babel-eslint": "^10.0.3",
     "eslint-config-prettier": "^6.6.0",
     "eslint-config-standard": "^14.1.0",

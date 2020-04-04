@@ -1,72 +1,28 @@
-/* eslint-disable node/no-extraneous-require */
-const fs = require('fs');
 const { resolve } = require('path');
 
-const isGlob = require('is-glob');
-const globSync = require('tiny-glob/sync');
+const {
+  isMonorepo,
+  isPkgAvailable,
+  monorepoPkgs,
+  tryRequirePkg,
+} = require('@pkgr/utils');
 
-exports.tryFile = filePath => (fs.existsSync(filePath) ? filePath : undefined);
-
-let pkg = {};
-
-try {
-  pkg = require(resolve('package.json'));
-} catch (e) {}
-
-let lernaConfig;
-
-try {
-  lernaConfig = require(resolve('lerna.json'));
-} catch (e) {}
-
-const pkgsPath = (lernaConfig && lernaConfig.packages) || pkg.workspaces;
-
-exports.isMonorepo = Array.isArray(pkgsPath);
-
-if (exports.isMonorepo) {
-  const pkgs = pkgsPath.reduce(
-    (acc, pkg) =>
-      acc
-        .concat(
-          isGlob(pkg)
-            ? globSync(pkg).map(sub => resolve(sub))
-            : exports.tryFile(resolve(pkg)),
-        )
-        .filter(Boolean),
-    [],
-  );
-
-  try {
-    exports.allowModules = pkgs.reduce((acc, pkg) => {
-      const pkgJson = resolve(pkg, 'package.json');
-      return fs.existsSync(pkgJson) ? acc.concat(require(pkgJson).name) : acc;
-    }, []);
-  } catch (e) {}
+if (isMonorepo) {
+  exports.allowModules = monorepoPkgs.reduce((acc, pkg) => {
+    const pkgJson = tryRequirePkg(resolve(pkg, 'package.json'));
+    if (!pkgJson) {
+      return acc;
+    }
+    const { name, peerDependencies = {}, dependencies = {} } = pkgJson;
+    return acc.concat(
+      name,
+      Object.keys(peerDependencies),
+      Object.keys(dependencies),
+    );
+  }, []);
 }
 
-try {
-  exports.isSrcDirAvailable = fs.statSync(resolve('src')).isDirectory();
-} catch (e) {}
-
-try {
-  exports.isSrcAppDirAvailable = fs.statSync(resolve('src/app')).isDirectory();
-} catch (e) {}
-
-try {
-  exports.isNgAvailable = !!require.resolve('@angular/core');
-} catch (e) {}
-
-try {
-  exports.isReactAvailable = !!require.resolve('react');
-} catch (e) {}
-
-try {
-  exports.isVueAvailable = !!require.resolve('vue');
-} catch (e) {}
-
-try {
-  exports.isWebpackAvailable = !!require.resolve('webpack');
-} catch (e) {}
+exports.isWebpackAvailable = isPkgAvailable('webpack');
 
 // https://webpack.js.org/api/module-variables/#__resourcequery-webpack-specific
 exports.webpackSpecVars = [
@@ -78,6 +34,15 @@ exports.webpackSpecVars = [
   '__webpack_public_path__',
   '__webpack_require__',
   'DEBUG',
+];
+
+exports.camelCaseRule = [
+  2,
+  {
+    properties: 'never',
+    ignoreDestructuring: true,
+    allow: exports.isWebpackAvailable ? exports.webpackSpecVars : undefined,
+  },
 ];
 
 exports.magicNumbers = [
@@ -98,7 +63,9 @@ exports.magicNumbers = [
   100,
   365,
   500,
+  768,
   1000,
   1024,
   3600,
+  8080,
 ];

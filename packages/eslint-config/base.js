@@ -1,81 +1,96 @@
+const { getGlobals } = require('eslint-plugin-mdx');
+
+const {
+  allowModules,
+  camelCaseRule,
+  isWebpackAvailable,
+  magicNumbers,
+  webpackSpecVars,
+} = require('./_util');
+
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
   extends: [
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:node/recommended',
+    'plugin:promise/recommended',
+    'plugin:sonarjs/recommended',
+    'plugin:unicorn/recommended',
+    'standard',
     'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
-    'prettier/react',
+    'prettier/standard',
+    'prettier/unicorn',
   ],
+  settings: {
+    node: {
+      allowModules,
+      tryExtensions: [
+        '.ts',
+        '.tsx',
+        '.vue',
+        '.mjs',
+        '.js',
+        '.jsx',
+        '.json',
+        '.node',
+        '.mdx',
+      ],
+    },
+  },
+  globals: isWebpackAvailable ? getGlobals(webpackSpecVars) : undefined,
   rules: {
-    // Specific rules
-    '@typescript-eslint/adjacent-overload-signatures': 2,
-    '@typescript-eslint/consistent-type-definitions': [2, 'interface'],
-    '@typescript-eslint/member-naming': [
+    camelcase: camelCaseRule,
+    'import/order': [
       2,
       {
-        private: '^_',
+        'newlines-between': 'always',
       },
     ],
-    '@typescript-eslint/no-extraneous-class': 2,
-    '@typescript-eslint/no-for-in-array': 2,
-    '@typescript-eslint/no-parameter-properties': 0,
-    '@typescript-eslint/no-require-imports': 2,
-    '@typescript-eslint/no-this-alias': [
+    'no-empty': [
       2,
       {
-        allowDestructuring: true,
-        allowedNames: ['self'],
+        allowEmptyCatch: true,
       },
     ],
-    '@typescript-eslint/no-useless-constructor': 2,
-    '@typescript-eslint/prefer-for-of': 2,
-    '@typescript-eslint/prefer-function-type': 2,
-    '@typescript-eslint/triple-slash-reference': [
+    'no-empty-function': 2,
+    'no-magic-numbers': [
       2,
       {
-        lib: 'never',
-        path: 'always',
-        types: 'prefer-import',
+        enforceConst: true,
+        ignore: magicNumbers,
+        ignoreArrayIndexes: true,
       },
     ],
-    '@typescript-eslint/unified-signatures': 2,
-    // Ignored rules
-    'import/default': 0,
-    'import/named': 0,
-    '@typescript-eslint/ban-ts-ignore': 0,
-    'import/no-named-as-default': 0,
-    'import/no-named-as-default-member': 0,
-    'no-empty-function': 0,
-    'no-unused-vars': 0,
-    'no-useless-constructor': 0,
-    'node/no-missing-import': 0,
-    'node/shebang': 0,
-    'promise/always-return': 0,
-    'promise/catch-or-return': 0,
-    '@typescript-eslint/no-var-require': 0,
-    '@typescript-eslint/interface-name-prefix': 0,
-    '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/no-use-before-define': 0,
-    '@typescript-eslint/no-empty-interface': 0,
-    '@typescript-eslint/no-non-null-assertion': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/member-ordering': 0,
-    '@typescript-eslint/no-floating-promises': 0,
-    '@typescript-eslint/no-misused-promises': 0,
-    '@typescript-eslint/no-type-alias': 0,
-    '@typescript-eslint/no-unnecessary-condition': 0,
-    '@typescript-eslint/unbound-method': 0,
-    '@typescript-eslint/restrict-plus-operands': 0,
-    '@typescript-eslint/array-type': 0,
-    '@typescript-eslint/no-magic-numbers': 0,
-    'react/display-name': 0,
-    'react/jsx-curly-brace-presence': 0,
-    'react/no-unescaped-entities': 0,
-    'jsx-indent': 0,
+    'node/no-unsupported-features/es-syntax': 0,
+    'node/no-unsupported-features/node-builtins': 0,
+    'node/no-unpublished-import': 0,
+    'node/no-unpublished-require': 0,
+    'prefer-const': 2,
+    'unicorn/catch-error-name': [
+      2,
+      {
+        name: 'error',
+        caughtErrorsIgnorePattern: '^e(rr)?$',
+      },
+    ],
+    'unicorn/consistent-function-scoping': 0,
+    'unicorn/filename-case': [
+      2,
+      {
+        cases: {
+          kebabCase: true,
+          pascalCase: true,
+        },
+        // ignore UPPER_CASE markdown filenames
+        ignore: [/^[A-Z](([\dA-Z]+_)*[\dA-Z]+)?\.mdx?$/],
+      },
+    ],
+    'unicorn/prevent-abbreviations': 0,
+    'unicorn/regex-shorthand': [
+      2,
+      {
+        sortCharacterClasses: false,
+      },
+    ],
   },
 };

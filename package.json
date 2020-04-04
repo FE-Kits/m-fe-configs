@@ -25,9 +25,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@m-fe/app-config": "^0.4.2"
+
   },
   "devDependencies": {
+    "@m-fe/app-config": "^0.4.4",
     "@angular/core": "^8.2.8",
     "@babel/core": "^7.6.2",
     "@commitlint/cli": "^8.2.0",
@@ -61,7 +62,6 @@
       "@m-fe"
     ]
   },
-  "prettier": "@m-fe/prettier-config/semi",
   "remarkConfig": {
     "plugins": [
       "@m-fe/remark-config"

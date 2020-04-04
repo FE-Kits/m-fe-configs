@@ -4,7 +4,9 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "paths": {
-      "*": ["src/app/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "target": "es2015"
   },

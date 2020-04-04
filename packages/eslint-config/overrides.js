@@ -1,24 +1,29 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-const { resolve } = require('path')
+const fs = require('fs');
+const { resolve } = require('path');
 
 const {
-  isAngularAvailable,
-  isReactAvailable,
-  isPkgAvailable,
-  isTsAvailable,
-  isVueAvailable,
+  isNgAvailable,
+  isSrcDirAvailable,
+  isSrcAppDirAvailable,
+  isWebpackAvailable,
+  magicNumbers,
   tryFile,
-  tryPkg,
-} = require('@pkgr/utils')
+  webpackSpecVars,
+} = require('./_util');
 
-const { camelCaseRule, magicNumbers } = require('./_util')
+const BABEL_CONFIG = resolve('babel.config.js');
+const BABEL_RC_CONFIG = resolve('.babelrc.js');
 
-const configFile =
-  tryFile(resolve('babel.config.js')) ||
-  tryFile(resolve('.babelrc.js')) ||
-  tryPkg('@m-fe/babel-preset/config')
+let configFile;
 
-const jsBase = {
+try {
+  configFile =
+    tryFile(BABEL_CONFIG) ||
+    tryFile(BABEL_RC_CONFIG) ||
+    require.resolve('@m-fe/babel-preset/config');
+} catch (e) {}
+
+exports.js = {
   files: '*.{mjs,js,jsx}',
   parser: 'babel-eslint',
   parserOptions: configFile && {
@@ -27,20 +32,13 @@ const jsBase = {
     },
   },
   plugins: ['babel'],
-  extends: ['prettier/babel'],
   rules: {
     camelcase: 0,
     'new-cap': 0,
     'no-invalid-this': 0,
     'no-unused-expressions': 0,
     'valid-typeof': 0,
-    'babel/camelcase': [
-      2,
-      {
-        properties: 'never',
-        ignoreDestructuring: true,
-      },
-    ],
+    'babel/camelcase': 2,
     'babel/new-cap': 2,
     'babel/no-invalid-this': 2,
     'babel/no-unused-expressions': 2,
@@ -48,30 +46,30 @@ const jsBase = {
   },
 };
 
-exports.js = jsBase;
-
-const project =
+const TS_CONFIGS = [
   tryFile(resolve('tsconfig.eslint.json')) ||
-  tryFile(resolve('tsconfig.base.json')) ||
-  tryFile(resolve('tsconfig.json')) ||
-  tryPkg('@m-fe/tsconfig')
+    tryFile(resolve('tsconfig.base.json')) ||
+    tryFile(resolve('tsconfig.json')),
+].filter(Boolean);
+
+let project;
+
+try {
+  project = TS_CONFIGS.length ? TS_CONFIGS : require.resolve('@m-fe/tsconfig');
+} catch (e) {}
 
 const resolveSettings = {
-  'import/external-module-folders': [
-    'node_modules',
-    'node_modules/@d-ts',
-    'node_modules/@types',
-  ],
   'import/resolver': {
     ts: {
       alwaysTryTypes: true,
-      directory: project,
+      directory: TS_CONFIGS,
     },
   },
   node: {
     resolvePaths: [
-      tryFile('node_modules/@d-ts', true),
-      tryFile('node_modules/@types', true),
+      resolve('node_modules/@types'),
+      isSrcDirAvailable && !isNgAvailable && resolve('src'),
+      isNgAvailable && isSrcAppDirAvailable && resolve('src/app'),
     ].filter(Boolean),
     tryExtensions: [
       '.ts',
@@ -86,7 +84,7 @@ const resolveSettings = {
       '.mdx',
     ],
   },
-}
+};
 
 const tsBase = {
   files: '*.{ts,tsx}',
@@ -106,7 +104,14 @@ const tsBase = {
       },
     ],
     '@typescript-eslint/ban-ts-ignore': 0,
-    '@typescript-eslint/camelcase': camelCaseRule,
+    '@typescript-eslint/camelcase': [
+      2,
+      {
+        properties: 'never',
+        ignoreDestructuring: true,
+        allow: isWebpackAvailable && webpackSpecVars,
+      },
+    ],
     '@typescript-eslint/consistent-type-definitions': [2, 'interface'],
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/explicit-member-accessibility': [
@@ -186,7 +191,7 @@ const tsBase = {
     'promise/always-return': 0,
     'promise/catch-or-return': 0,
   },
-}
+};
 
 exports.ts = [
   tsBase,
@@ -198,7 +203,7 @@ exports.ts = [
   },
   {
     files: '*.{ts,tsx}',
-    excludedFiles: '*.d.ts',
+    excludedFiles: '*.{d,spec}.ts',
     parserOptions: {
       project,
     },
@@ -235,12 +240,11 @@ exports.ts = [
       'no-magic-numbers': 0,
     },
   },
-]
+];
 
 exports.dTs = {
   files: '*.d.ts',
   rules: {
-    '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-extraneous-class': 0,
     '@typescript-eslint/no-namespace': 0,
     '@typescript-eslint/no-unused-vars': 0,
@@ -248,32 +252,42 @@ exports.dTs = {
     'import/order': 0,
     'node/no-extraneous-import': 0,
   },
-}
+};
 
-const TSLINT_CONFIG = tryFile(resolve('tslint.json'))
-const lintFile = TSLINT_CONFIG || tryPkg('@m-fe/tslint-config')
+let tslint = false;
+
+try {
+  tslint = !!require.resolve('tslint');
+} catch (e) {}
+
+const TSLINT_CONFIG = resolve('tslint.json');
+const tslintConfigAvailable = fs.existsSync(TSLINT_CONFIG);
+
+let lintFile = tslintConfigAvailable ? TSLINT_CONFIG : undefined;
+
+try {
+  lintFile = lintFile || require.resolve('@m-fe/tslint-config');
+} catch (e) {}
 
 exports.tslint = {
   files: '*.{ts,tsx}',
-  excludedFiles: '*.d.ts',
-  plugins: TSLINT_CONFIG ? ['@typescript-eslint/tslint'] : undefined,
+  excludedFiles: '*.{d,ts}.ts',
+  plugins: tslintConfigAvailable ? ['@typescript-eslint/tslint'] : undefined,
   rules: Object.assign(
     {
       // `ordered-imports` of tslint is better for now
       'import/order': 0,
     },
-    TSLINT_CONFIG
-      ? undefined
-      : {
-          '@typescript-eslint/tslint/config': [
-            2,
-            {
-              lintFile,
-            },
-          ],
+    tslintConfigAvailable || {
+      '@typescript-eslint/tslint/config': [
+        2,
+        {
+          lintFile,
         },
+      ],
+    },
   ),
-}
+};
 
 exports.angular = [
   {
@@ -288,10 +302,11 @@ exports.angular = [
       '@typescript-eslint/no-extraneous-class': 0,
     },
   },
-]
+];
 
 const reactJsx = {
   extends: [
+    'standard-jsx', // for Vue
     'standard-react',
     'plugin:react/recommended',
     'prettier',
@@ -302,7 +317,7 @@ const reactJsx = {
       version: 'detect',
     },
   },
-}
+};
 
 exports.react = [
   Object.assign(
@@ -327,7 +342,7 @@ exports.react = [
       'react/display-name': 0,
     },
   },
-]
+];
 
 exports.reactHooks = {
   files: '*.{js,jsx,ts,tsx}',
@@ -336,7 +351,7 @@ exports.reactHooks = {
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 2,
   },
-}
+};
 
 exports.reactTs = {
   files: '*.{ts,tsx}',
@@ -344,78 +359,64 @@ exports.reactTs = {
     'no-restricted-imports': [2, 'prop-types'],
     'react/prop-types': 0,
   },
-}
+};
 
-const vueExtends = ['plugin:vue/recommended', 'prettier', 'prettier/vue']
+exports.vue = Object.assign({}, tsBase, {
+  files: ['*.vue'],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    extraFileExtensions: ['.vue'],
+  },
+  extends: tsBase.extends.concat('plugin:vue/recommended', 'prettier/vue'),
+});
 
-exports.vue = [
-  Object.assign({}, jsBase, {
-    parser: 'vue-eslint-parser',
-    parserOptions: Object.assign({}, jsBase.parserOptions, {
-      parser: jsBase.parser,
-    }),
-    extends: vueExtends,
-  }),
-  Object.assign({}, tsBase, {
-    parser: 'vue-eslint-parser',
-    files: '*.{vue,ts,tsx}',
-    parserOptions: {
-      parser: '@typescript-eslint/parser',
-      extraFileExtensions: ['.vue'],
-    },
-    extends: tsBase.extends.concat(vueExtends),
-  }),
-]
-
-exports.mdx = {
+exports.mdx = Object.assign({}, reactJsx, {
   files: '*.{md,mdx}',
-  extends: reactJsx.extends.concat('plugin:mdx/recommended'),
-  parserOptions: jsBase.parserOptions,
+  extends: reactJsx.extends.concat(['plugin:mdx/recommended']),
   settings: Object.assign({}, reactJsx.settings, resolveSettings),
-}
+});
 
 const nonSourceRules = {
   'node/no-extraneous-import': 0,
   'node/no-extraneous-require': 0,
   'node/no-unsupported-features/es-builtins': 0,
-}
+};
 
 exports.test = {
   files: '**/{__test__,test,tests}/**/*.{js,jsx,mdx,ts,tsx,vue}',
   rules: nonSourceRules,
-}
+};
 
 exports.jest = {
   files: '*.{spec,test}.{js,jsx,ts,tsx}',
   extends: ['plugin:jest/recommended'],
   rules: exports.test.rules,
-}
+};
 
 exports.stories = {
   files: '**/stories/**/*.{js,jsx,mdx,ts,tsx,vue}',
   rules: nonSourceRules,
-}
+};
 
 exports.config = {
   files: ['.*rc.js', '*.config.{js,ts}'],
   rules: nonSourceRules,
-}
+};
 
-exports.overrides = []
+exports.overrides = exports.ts
   .concat(
-    isPkgAvailable('@babel/core') && exports.js,
-    isTsAvailable && exports.ts,
-    isPkgAvailable('tslint') && lintFile && exports.tslint,
-    isReactAvailable && exports.react,
-    isReactAvailable && exports.reactHooks,
-    isReactAvailable && exports.reactTs,
-    isVueAvailable && exports.vue,
-    isAngularAvailable && exports.angular,
+    exports.js,
+    exports.dTs,
+    tslint && lintFile && exports.tslint,
+    exports.react,
+    exports.reactHooks,
+    exports.reactTs,
+    isNgAvailable && exports.angular,
+    exports.vue,
     exports.mdx,
     exports.jest,
     exports.test,
     exports.stories,
     exports.config,
-    exports.dTs,
   )
-  .filter(Boolean)
+  .filter(Boolean);

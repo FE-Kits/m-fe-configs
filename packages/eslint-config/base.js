@@ -1,97 +1,47 @@
-const { getGlobals } = require('eslint-plugin-mdx');
-
-const {
-  allowModules,
-  camelCaseRule,
-  isWebpackAvailable,
-  magicNumbers,
-  webpackSpecVars,
-} = require('./_util');
-
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   extends: [
-    'eslint:recommended',
-    'plugin:import/recommended',
-    'plugin:node/recommended',
-    'plugin:promise/recommended',
-    'plugin:sonarjs/recommended',
-    'plugin:unicorn/recommended',
-    'standard',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'prettier/standard',
-    'prettier/unicorn',
+    'prettier/@typescript-eslint',
+    'prettier/react',
   ],
-  settings: {
-    node: {
-      allowModules,
-      tryExtensions: [
-        '.ts',
-        '.tsx',
-        '.vue',
-        '.mjs',
-        '.js',
-        '.jsx',
-        '.json',
-        '.node',
-        '.mdx',
-      ],
-    },
-  },
-  globals: isWebpackAvailable ? getGlobals(webpackSpecVars) : undefined,
   rules: {
-    camelcase: camelCaseRule,
-    'import/order': [
+    // Specific rules
+    '@typescript-eslint/adjacent-overload-signatures': 2,
+    '@typescript-eslint/consistent-type-definitions': [2, 'interface'],
+    '@typescript-eslint/member-naming': [
       2,
       {
-        'newlines-between': 'always',
+        private: '^_',
       },
     ],
-    'no-empty': [
+    '@typescript-eslint/no-extraneous-class': 2,
+    '@typescript-eslint/no-for-in-array': 2,
+    '@typescript-eslint/no-parameter-properties': 0,
+    '@typescript-eslint/no-require-imports': 2,
+    '@typescript-eslint/no-this-alias': [
       2,
       {
-        allowEmptyCatch: true,
+        allowDestructuring: true,
+        allowedNames: ['self'],
       },
     ],
-    'no-empty-function': 2,
-    'no-magic-numbers': [
+    '@typescript-eslint/no-useless-constructor': 2,
+    '@typescript-eslint/prefer-for-of': 2,
+    '@typescript-eslint/prefer-function-type': 2,
+    '@typescript-eslint/triple-slash-reference': [
       2,
       {
-        enforceConst: true,
-        ignore: magicNumbers,
-        ignoreArrayIndexes: true,
+        lib: 'never',
+        path: 'always',
+        types: 'prefer-import',
       },
     ],
-    'node/no-unsupported-features/es-syntax': 0,
-    'node/no-unsupported-features/node-builtins': 0,
-    'node/no-unpublished-import': 0,
-    'node/no-unpublished-require': 0,
-    'prefer-const': 2,
-    'unicorn/catch-error-name': [
-      2,
-      {
-        name: 'error',
-        caughtErrorsIgnorePattern: '^e(rr)?$',
-      },
-    ],
-    'unicorn/consistent-function-scoping': 0,
-    'unicorn/filename-case': [
-      2,
-      {
-        cases: {
-          kebabCase: true,
-          pascalCase: true,
-        },
-        // ignore UPPER_CASE markdown filenames
-        ignore: [/^[A-Z](([\dA-Z]+_)*[\dA-Z]+)?\.mdx?$/],
-      },
-    ],
-    'unicorn/prevent-abbreviations': 0,
-    'unicorn/regex-shorthand': [
-      2,
-      {
-        sortCharacterClasses: false,
-      },
-    ],
+    '@typescript-eslint/unified-signatures': 2,
+    // Ignored rules
     'import/default': 0,
     'import/named': 0,
     '@typescript-eslint/ban-ts-ignore': 0,

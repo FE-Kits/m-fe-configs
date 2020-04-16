@@ -158,6 +158,7 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
       window: 'window',
       jquery: '$',
     },
+    stats: __DEV__ ? 'normal' : 'errors-warnings',
     extra: {
       NODE_MODULES_REG,
       moduleCSSLoader,

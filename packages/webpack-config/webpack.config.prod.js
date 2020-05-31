@@ -104,7 +104,7 @@ module.exports = (
         alwaysWriteToDisk: true,
         inlineSource: /(^|[\\/])manifest\.\w+\.js$/,
         scripts: [],
-        publicPath: baseConfig.output.publicPath,
+        publicPath: baseConfig.output.publicPath || "./",
         ...htmlWebpackPluginOptions,
       }),
       new HtmlWebpackHarddiskPlugin(),

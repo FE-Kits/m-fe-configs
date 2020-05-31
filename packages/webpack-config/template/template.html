@@ -171,7 +171,6 @@
   </script><%
     }
 %>
-
   <!-- Chunks -->
   <%
 for (key in htmlWebpackPlugin.files.js) { %><%
@@ -180,8 +179,10 @@ for (key in htmlWebpackPlugin.files.js) { %><%
     integrity="<%= htmlWebpackPlugin.files.jsIntegrity[htmlWebpackPlugin.files.js.indexOf(htmlWebpackPlugin.files.chunks[key].entry)] %>"
     crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script><%
   } else { %>
-  <script src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key] %>"
-    type="text/javascript"></script><%
+  <script file="<%= htmlWebpackPlugin.files.js[key].replace('/','') %>"
+    src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key].replace('/','') %>"
+    type="text/javascript">
+  </script><%
   } %><%
 }
 

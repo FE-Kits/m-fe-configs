@@ -11,11 +11,12 @@
   <%
   for (key in htmlWebpackPlugin.files.css) { %><%
     if (htmlWebpackPlugin.files.cssIntegrity) { %>
-  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet"
-    integrity="<%= htmlWebpackPlugin.files.cssIntegrity[key] %>"
+  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key].replace('/','') %>"
+    rel="stylesheet" integrity="<%= htmlWebpackPlugin.files.cssIntegrity[key] %>"
     crossorigin="<%= webpackConfig.output.crossOriginLoading %>" /><%
     } else { %>
-  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet" /><%
+  <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key].replace('/','') %>"
+    rel="stylesheet" /><%
     } %><%
   }
   %>
@@ -175,7 +176,8 @@
   <%
 for (key in htmlWebpackPlugin.files.js) { %><%
   if (htmlWebpackPlugin.files.jsIntegrity) { %>
-  <script src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key] %>" type="text/javascript"
+  <script src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key].replace('/','') %>"
+    type="text/javascript"
     integrity="<%= htmlWebpackPlugin.files.jsIntegrity[htmlWebpackPlugin.files.js.indexOf(htmlWebpackPlugin.files.chunks[key].entry)] %>"
     crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script><%
   } else { %>

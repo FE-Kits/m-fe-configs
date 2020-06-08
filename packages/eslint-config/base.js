@@ -12,12 +12,6 @@ module.exports = {
     // Specific rules
     '@typescript-eslint/adjacent-overload-signatures': 2,
     '@typescript-eslint/consistent-type-definitions': [2, 'interface'],
-    '@typescript-eslint/member-naming': [
-      2,
-      {
-        private: '^_',
-      },
-    ],
     '@typescript-eslint/no-extraneous-class': 2,
     '@typescript-eslint/no-for-in-array': 2,
     '@typescript-eslint/no-parameter-properties': 0,
@@ -77,5 +71,8 @@ module.exports = {
     'react/jsx-curly-brace-presence': 0,
     'react/no-unescaped-entities': 0,
     'jsx-indent': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/ban-types': 1,
+    '@typescript-eslint/ban-ts-comment': 0,
   },
 };

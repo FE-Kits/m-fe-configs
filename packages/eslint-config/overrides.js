@@ -123,12 +123,6 @@ const tsBase = {
         },
       },
     ],
-    '@typescript-eslint/member-naming': [
-      2,
-      {
-        private: '^_',
-      },
-    ],
     '@typescript-eslint/member-ordering': 2,
     '@typescript-eslint/no-empty-function': 2,
     '@typescript-eslint/no-extraneous-class': 2,
@@ -290,12 +284,6 @@ exports.tslint = {
 };
 
 exports.angular = [
-  {
-    files: '*.ts',
-    rules: {
-      '@typescript-eslint/member-naming': 0,
-    },
-  },
   {
     files: ['*.component.ts', '*.module.ts', 'component.ts', 'module.ts'],
     rules: {

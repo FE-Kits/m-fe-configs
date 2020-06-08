@@ -28,7 +28,7 @@
 
   },
   "devDependencies": {
-    "@m-fe/app-config": "^0.4.4",
+    "@m-fe/app-config": "^0.5.8",
     "@angular/core": "^8.2.8",
     "@babel/core": "^7.6.2",
     "@commitlint/cli": "^8.2.0",

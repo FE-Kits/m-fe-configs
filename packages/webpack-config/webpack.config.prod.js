@@ -10,10 +10,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const PrepackWebpackPlugin = require('prepack-webpack-plugin').default;
 
 module.exports = (
   baseConfig,
-  { cacheId, title, htmlWebpackPluginOptions } = {},
+  {
+    cacheId,
+    title,
+    htmlWebpackPluginOptions,
+    usePrepack,
+    useFractalNpmPackages,
+  } = {},
 ) => {
   const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
 
@@ -77,9 +84,10 @@ module.exports = (
       // 暂时存在 Bug,等待修复
       // 使用前 21 - 425
       // 使用后 21 - 433
-      // new PrepackWebpackPlugin({
-      //   mathRandomSeed: '0'
-      // }),
+      usePrepack &&
+        new PrepackWebpackPlugin({
+          mathRandomSeed: '0',
+        }),
 
       // 必须将 CopyWebpackPlugin 与 HtmlWebpackPlugin 添加到末尾
       new CopyWebpackPlugin([{ from: buildEnv.public, to: buildEnv.build }]),
@@ -104,11 +112,11 @@ module.exports = (
         alwaysWriteToDisk: true,
         inlineSource: /(^|[\\/])manifest\.\w+\.js$/,
         scripts: [],
-        publicPath: baseConfig.output.publicPath || "./",
+        publicPath: baseConfig.output.publicPath || './',
         ...htmlWebpackPluginOptions,
       }),
       new HtmlWebpackHarddiskPlugin(),
-    ],
+    ].filter(p => !!p),
 
     optimization: {
       runtimeChunk: 'single',
@@ -124,18 +132,33 @@ module.exports = (
         new OptimizeCSSAssetsPlugin({}),
       ],
       splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
         cacheGroups: {
-          vendors: {
-            test: /node_modules/,
-            name: 'vendors',
-            enforce: true,
-            chunks: 'all',
-          },
+          vendors: useFractalNpmPackages
+            ? {
+                test: /[\\/]node_modules[\\/]/,
+                name(module) {
+                  // get the name. E.g. node_modules/packageName/not/this/part.js
+                  // or node_modules/packageName
+                  const packageName = module.context.match(
+                    /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+                  )[1];
+
+                  // npm package names are URL-safe, but some servers don't like @ symbols
+                  return `npm.${packageName.replace('@', '')}`;
+                },
+              }
+            : {
+                test: /node_modules/,
+                name: 'vendors',
+                enforce: true,
+              },
           // 将所有的样式文件打包到单个项目
           styles: {
-            name: 'styles',
             test: /\.css$/,
-            chunks: 'all',
+            name: 'styles',
             enforce: true,
           },
         },

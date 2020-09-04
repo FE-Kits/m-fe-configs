@@ -7,7 +7,8 @@ module.exports = ({
   themeVars = {},
   title = 'Awesome App',
   useCssModule = true,
-
+  usePrepack = false,
+  useFractalNpmPackages = false,
   extendedBaseConfig = {},
   htmlWebpackPluginOptions = {},
 } = {}) => {
@@ -45,6 +46,8 @@ module.exports = ({
       title,
       target,
       htmlWebpackPluginOptions,
+      usePrepack,
+      useFractalNpmPackages,
     },
   );
 

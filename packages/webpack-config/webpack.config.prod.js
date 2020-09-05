@@ -132,7 +132,7 @@ module.exports = (
         new OptimizeCSSAssetsPlugin({}),
       ],
       splitChunks: {
-        chunks: 'all',
+        chunks: 'initial',
         maxInitialRequests: Infinity,
         minSize: 0,
         cacheGroups: {
@@ -160,6 +160,7 @@ module.exports = (
             test: /\.css$/,
             name: 'styles',
             enforce: true,
+            chunks: 'all',
           },
         },
       },

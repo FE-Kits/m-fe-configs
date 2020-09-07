@@ -157,7 +157,7 @@ module.exports = (
               },
           // 将所有的样式文件打包到单个项目
           styles: {
-            test: /\.css$/,
+            test: /\.(css|less)$/,
             name: 'styles',
             enforce: true,
             chunks: 'all',

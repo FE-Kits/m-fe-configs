@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 // const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');

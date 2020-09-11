@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const path = require('path');
 const process = require('process');
 
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const RewriteImportPlugin = require('less-plugin-rewrite-import');
 
 const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -45,15 +42,6 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
       },
       javascriptEnabled: true,
       sourceMap: __DEV__,
-      plugins: [
-        new RewriteImportPlugin({
-          paths: {
-            // '~antd/es/style/themes/default.less': function() {
-            //   return 'antd/es/style/themes/default.less';
-            // },
-          },
-        }),
-      ],
     },
   };
 

@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   coverageDirectory: '<rootDir>/@coverage',
@@ -21,4 +21,4 @@ module.exports = {
   testRegex: '/__test__/.+\\.(test|spec)\\.tsx?$',
   transform: { '^.+\\.tsx?$': 'ts-jest' },
   verbose: true,
-}
+};

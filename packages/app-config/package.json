@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/app-config",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "description": "Shareable configuration for all micro-frontend projects.",
   "repository": "https://github.com/FE-Kits/m-fe-configs",
   "homepage": "https://github.com/FE-Kits/m-fe-configs",

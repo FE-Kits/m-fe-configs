@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 // const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
 
 module.exports = (baseConfig, { rootPath, themeVars, target } = {}) => {

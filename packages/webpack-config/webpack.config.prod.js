@@ -1,7 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -77,7 +77,7 @@ module.exports = (
       }),
 
       new MiniCssExtractPlugin({
-        filename: useCssHash ? '[name].[contenthash].css' : '[name].css',
+        filename: useCssHash ? '[name].[hash].css' : '[name].css',
       }),
 
       // 使用 Prepack 优化包体大小
@@ -90,7 +90,9 @@ module.exports = (
         }),
 
       // 必须将 CopyWebpackPlugin 与 HtmlWebpackPlugin 添加到末尾
-      new CopyWebpackPlugin([{ from: buildEnv.public, to: buildEnv.build }]),
+      new CopyWebpackPlugin({
+        patterns: [{ from: buildEnv.public, to: buildEnv.build }],
+      }),
 
       new HtmlWebpackPlugin({
         template: path.join(__dirname, './template/template.html'),

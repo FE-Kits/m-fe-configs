@@ -45,6 +45,7 @@ const configMap = require('../../..')({
   },
   usePrepack: true,
   useFractalNpmPackages: true,
+  useCssHash: true,
   htmlWebpackPluginOptions: {
     scripts: ['a.js'],
   },

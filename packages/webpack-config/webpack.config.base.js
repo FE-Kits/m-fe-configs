@@ -26,11 +26,11 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
             localIdentName: __DEV__
               ? '[path][name]__[local]---[hash:base64:5]'
               : '[hash:base64:10]',
+            exportLocalsConvention: 'camelCaseOnly',
           }
         : false,
       sourceMap: __DEV__,
       importLoaders: 2,
-      localsConvention: 'camelCaseOnly',
     },
   };
 
@@ -133,9 +133,7 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
       ],
     },
     plugins: [
-      new ForkTsCheckerWebpackPlugin({
-        eslint: { enabled: true },
-      }),
+      new ForkTsCheckerWebpackPlugin(),
       new webpack.WatchIgnorePlugin([/less\.d\.ts$/]),
       new webpack.IgnorePlugin(/\.js\.map$/),
     ],

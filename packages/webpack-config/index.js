@@ -9,6 +9,7 @@ module.exports = ({
   useCssModule = true,
   usePrepack = false,
   useFractalNpmPackages = false,
+  useCssHash = false,
   extendedBaseConfig = {},
   htmlWebpackPluginOptions = {},
 } = {}) => {
@@ -48,6 +49,7 @@ module.exports = ({
       htmlWebpackPluginOptions,
       usePrepack,
       useFractalNpmPackages,
+      useCssHash,
     },
   );
 

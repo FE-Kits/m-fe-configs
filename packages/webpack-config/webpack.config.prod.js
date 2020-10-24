@@ -19,6 +19,7 @@ module.exports = (
     htmlWebpackPluginOptions,
     usePrepack,
     useFractalNpmPackages,
+    useCssHash,
   } = {},
 ) => {
   const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
@@ -29,8 +30,8 @@ module.exports = (
     devtool: false,
     mode: 'production',
     output: {
-      ...baseConfig.output,
       filename: '[name].[contenthash].js',
+      ...baseConfig.output,
     },
     module: {
       rules: [
@@ -76,7 +77,7 @@ module.exports = (
       }),
 
       new MiniCssExtractPlugin({
-        filename: '[name].css',
+        filename: useCssHash ? '[name].[contenthash].css' : '[name].css',
       }),
 
       // 使用 Prepack 优化包体大小

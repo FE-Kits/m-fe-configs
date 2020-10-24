@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/app-config",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "description": "Shareable configuration for all micro-frontend projects.",
   "repository": "https://github.com/FE-Kits/m-fe-configs",
   "homepage": "https://github.com/FE-Kits/m-fe-configs",
@@ -35,7 +35,7 @@
     "@m-fe/stylelint-config": "^0.0.7",
     "@m-fe/tsconfig": "^0.0.4",
     "@m-fe/tslint-config": "^0.0.4",
-    "@m-fe/webpack-config": "^0.1.16",
+    "@m-fe/webpack-config": "^0.1.17",
     "autoprefixer": "^9.7.6",
     "eslint": "^7.0.0",
     "husky": "^4.2.5",

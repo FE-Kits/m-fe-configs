@@ -134,8 +134,7 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({
-        checkSyntacticErrors: true,
-        eslint: true,
+        eslint: { enabled: true },
       }),
       new webpack.WatchIgnorePlugin([/less\.d\.ts$/]),
       new webpack.IgnorePlugin(/\.js\.map$/),

@@ -2,8 +2,8 @@
   "name": "@m-fe/lib-config",
   "version": "0.0.1",
   "description": "Shareable Library Configuration for all micro-frontend libs.",
-  "repository": "https://github.com/FE-Kits/m-fe-configs",
-  "homepage": "https://github.com/FE-Kits/m-fe-configs",
+  "repository": "https://github.com/wx-chevalier/m-fe-configs",
+  "homepage": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
   "license": "MIT",
   "engines": {

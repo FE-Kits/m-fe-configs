@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/tslint-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Shareable TSLint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
@@ -11,7 +11,6 @@
     "typescript": ">=3.9.7"
   },
   "dependencies": {
-    "codelyzer": "^6.0.0",
     "rxjs-tslint": "0.1.5",
     "tslint-angular": "^3.0.2",
     "tslint-config-eslint": "^0.2.1",

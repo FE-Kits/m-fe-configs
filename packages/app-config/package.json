@@ -1,9 +1,9 @@
 {
   "name": "@m-fe/app-config",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "description": "Shareable configuration for all micro-frontend projects.",
-  "repository": "https://github.com/FE-Kits/m-fe-configs",
-  "homepage": "https://github.com/FE-Kits/m-fe-configs",
+  "repository": "https://github.com/wx-chevalier/m-fe-configs",
+  "homepage": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
   "license": "MIT",
   "engines": {
@@ -34,7 +34,7 @@
     "@m-fe/remark-config": "^0.0.1",
     "@m-fe/stylelint-config": "^0.0.7",
     "@m-fe/tsconfig": "^0.0.4",
-    "@m-fe/tslint-config": "^0.0.4",
+    "@m-fe/tslint-config": "^0.0.5",
     "@m-fe/webpack-config": "^0.1.18",
     "autoprefixer": "^9.7.6",
     "eslint": "^7.0.0",

@@ -66,7 +66,9 @@
     <script>
       if ('addEventListener' in document) {
         document.addEventListener('DOMContentLoaded', function () {
-          FastClick.attach(document.body);
+          if (typeof FastClick !== "undefined") {
+            FastClick.attach(document.body);
+          }
         }, false);
       }
       if (!window.Promise) {
@@ -156,7 +158,6 @@
           height: 5em
         }
       }
-
     </style>
 </head>
 
@@ -166,7 +167,6 @@
     .unsupported-browser {
       display: none;
     }
-
   </style>
   <div class="unsupported-browser">
     Sorry, your browser is not supported. Please upgrade to the latest version or switch your browser to use this
@@ -197,7 +197,7 @@
     for (key in htmlWebpackPlugin.options.window) {
       %
       >
-      window['<%= key %>'] = < %= JSON.stringify(htmlWebpackPlugin.options.window[key]) % > ; < %
+        window['<%= key %>'] = < %= JSON.stringify(htmlWebpackPlugin.options.window[key]) % > ; < %
     } % >
 
   </script><%
@@ -211,8 +211,8 @@
 
     for (item of htmlWebpackPlugin.options.scripts) { %><%
       if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
-  <script<% for (key in item) { %> <%= key %>="<%= item[key] %>" <% } %>>
-    </script><%
+  <script<% for (key in item) { %> <%= key %>= "<%= item[key] %>" <% } %>>
+  </script><%
     } %>
 
 
@@ -234,26 +234,26 @@
 
 </body>
 <script>
-  function loadScript(src, cb) {
-    //创建一个script元素
-    var el = document.createElement('script');
-    var loaded = false;
-    //设置加载完成的回调事件
-    el.onload = el.onreadystatechange = function () {
-      //防止重复加载
-      if ((el.readyState && el.readyState !== 'complete' && el.readyState !== 'loaded') || loaded) {
-        return false;
-      }
-      //加载完成后将该脚本的onload设置为null
-      el.onload = el.onreadystatechange = null;
-      loaded = true;
-      cb && cb();
-    };
-    el.async = true;
-    el.src = src;
-    var body = document.getElementsByTagName('body')[0];
-    body.appendChild(el);
-  }
+    function loadScript(src, cb) {
+      //创建一个script元素
+      var el = document.createElement('script');
+      var loaded = false;
+      //设置加载完成的回调事件
+      el.onload = el.onreadystatechange = function () {
+        //防止重复加载
+        if ((el.readyState && el.readyState !== 'complete' && el.readyState !== 'loaded') || loaded) {
+          return false;
+        }
+        //加载完成后将该脚本的onload设置为null
+        el.onload = el.onreadystatechange = null;
+        loaded = true;
+        cb && cb();
+      };
+      el.async = true;
+      el.src = src;
+      var body = document.getElementsByTagName('body')[0];
+      body.appendChild(el);
+    }
   window.onload = function () {
     var scripts = [];
     [].forEach.call(document.getElementsByClassName('async_script'), function (a) {

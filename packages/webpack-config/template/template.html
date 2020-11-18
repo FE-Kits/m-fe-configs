@@ -21,11 +21,13 @@
   }
   %>
 
-  <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
     if ('addEventListener' in document) {
       document.addEventListener('DOMContentLoaded', function () {
-        FastClick.attach(document.body);
+        if (typeof FastClick !== "undefined") {
+          FastClick.attach(document.body);
+        }
       }, false);
     }
     if (!window.Promise) {
@@ -116,7 +118,6 @@
         height: 5em
       }
     }
-
   </style>
 </head>
 
@@ -168,8 +169,8 @@
 <%
     for (item of htmlWebpackPlugin.options.scripts) { %><%
       if (typeof item === 'string' || item instanceof String) { item = { src: item, type: 'text/javascript' } } %>
-<script<% for (key in item) { %> <%= key %>="<%= item[key] %>" <% } %>>
-  </script><%
+<script<% for (key in item) { %> <%= key %>= "<%= item[key] %>" <% } %>>
+</script><%
     }
 %>
   <!-- Chunks -->
@@ -184,7 +185,7 @@ for (key in htmlWebpackPlugin.files.js) { %><%
   <script file="<%= htmlWebpackPlugin.files.js[key].replace('/','') %>"
     src="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.js[key].replace('/','') %>"
     type="text/javascript">
-  </script><%
+    </script><%
   } %><%
 }
 

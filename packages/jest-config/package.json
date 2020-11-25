@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/jest-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Shareable Commitlint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

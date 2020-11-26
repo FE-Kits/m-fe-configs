@@ -1,12 +1,12 @@
 {
   "name": "@m-fe/prettier-config",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Shareable Prettier Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
   "license": "MIT",
   "peerDependencies": {
-    "prettier": ">=1.18.0"
+    "prettier": ">=2.0.4"
   },
   "dependencies": {
     "@prettier/plugin-pug": "^1.2.0",

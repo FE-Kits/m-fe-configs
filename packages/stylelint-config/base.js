@@ -1,13 +1,14 @@
-const { isAngularAvailable, isVueAvailable } = require('@pkgr/utils');
+const { isAngularAvailable, isVueAvailable } = require('@pkgr/utils')
 
 module.exports = {
   extends: ['stylelint-config-standard'],
   plugins: [
-    'stylelint-no-unsupported-browser-features',
     'stylelint-high-performance-animation',
+    'stylelint-no-unsupported-browser-features',
   ],
   rules: Object.assign(
     {
+      'plugin/no-low-performance-animation-properties': true,
       'plugin/no-unsupported-browser-features': [
         true,
         {
@@ -29,4 +30,4 @@ module.exports = {
       ],
     },
   ),
-};
+}

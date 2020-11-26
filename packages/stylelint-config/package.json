@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/stylelint-config",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Shareable Stylelint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

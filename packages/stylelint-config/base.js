@@ -1,4 +1,4 @@
-const { isAngularAvailable, isVueAvailable } = require('@pkgr/utils')
+const { isAngularAvailable, isVueAvailable } = require('@pkgr/utils');
 
 module.exports = {
   extends: ['stylelint-config-standard'],
@@ -30,4 +30,4 @@ module.exports = {
       ],
     },
   ),
-}
+};

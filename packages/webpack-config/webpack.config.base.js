@@ -9,7 +9,7 @@ const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
-module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
+module.exports = ({ rootPath, themeVars, useCssModule } = {}) => {
   const buildEnv = {
     rootPath,
 
@@ -145,7 +145,6 @@ module.exports = ({ rootPath, themeVars, target, useCssModule } = {}) => {
     },
     stats: __DEV__ ? 'normal' : 'errors-warnings',
     extra: {
-      NODE_MODULES_REG,
       moduleCSSLoader,
       lessLoader,
       buildEnv,

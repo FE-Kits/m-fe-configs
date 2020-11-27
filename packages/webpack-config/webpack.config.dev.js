@@ -2,13 +2,10 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 // const LazyCompileWebpackPlugin = require('lazy-compile-webpack-plugin');
 
-module.exports = (baseConfig, { rootPath, themeVars, target } = {}) => {
-  const {
-    NODE_MODULES_REG,
-    buildEnv,
-    moduleCSSLoader,
-    lessLoader,
-  } = baseConfig.extra;
+const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
+
+module.exports = baseConfig => {
+  const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
 
   delete baseConfig.extra;
 
@@ -20,7 +17,6 @@ module.exports = (baseConfig, { rootPath, themeVars, target } = {}) => {
         {
           test: /\.css$/,
           use: ['style-loader', 'cache-loader', 'css-loader'],
-          include: [NODE_MODULES_REG, buildEnv.src],
         },
         {
           test: /\.less$/,
@@ -78,6 +74,11 @@ module.exports = (baseConfig, { rootPath, themeVars, target } = {}) => {
     },
     stats: {
       children: false,
+    },
+    resolve: {
+      alias: {
+        'react-dom': '@hot-loader/react-dom',
+      },
     },
   });
 };

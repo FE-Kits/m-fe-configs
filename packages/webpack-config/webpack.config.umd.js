@@ -1,9 +1,6 @@
 const path = require('path');
 
-module.exports = (
-  prodConfig,
-  { rootPath, cacheId, themeVars, title, target } = {},
-) => {
+module.exports = (prodConfig, { rootPath } = {}) => {
   const plugins = [...prodConfig.plugins];
 
   // 移除 CopyWebpackPlugin 与 HtmlWebpackPlugin

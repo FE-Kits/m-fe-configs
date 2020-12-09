@@ -76,6 +76,10 @@ module.exports = (
             urlPattern: /[./]api[./]/,
             handler: 'NetworkFirst',
           },
+          {
+            urlPattern: /\.html/,
+            handler: 'NetworkFirst',
+          },
         ],
       }),
 

@@ -68,6 +68,9 @@ module.exports = (
 
       new GenerateSW({
         cacheId,
+        skipWaiting: true,
+        clientsClaim: true,
+        exclude: [/\.map$/, /^manifest.*\.js(?:on)?$/, /\.html/],
         runtimeCaching: [
           {
             urlPattern: /[./]api[./]/,

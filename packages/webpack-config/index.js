@@ -12,6 +12,7 @@ module.exports = ({
   useCssHash = false,
   extendedBaseConfig = {},
   htmlWebpackPluginOptions = {},
+  useServiceworker = true,
 } = {}) => {
   console.log(`\nCurrent build path: ${rootPath}\n`);
 
@@ -50,6 +51,7 @@ module.exports = ({
       usePrepack,
       useFractalNpmPackages,
       useCssHash,
+      useServiceworker,
     },
   );
 

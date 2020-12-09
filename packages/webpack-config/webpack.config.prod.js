@@ -20,6 +20,7 @@ module.exports = (
     usePrepack,
     useFractalNpmPackages,
     useCssHash,
+    useServiceworker,
   } = {},
 ) => {
   const { buildEnv, moduleCSSLoader, lessLoader } = baseConfig.extra;
@@ -66,22 +67,24 @@ module.exports = (
         __DEV__: JSON.stringify(false),
       }),
 
-      new GenerateSW({
-        cacheId,
-        skipWaiting: true,
-        clientsClaim: true,
-        exclude: [/\.map$/, /^manifest.*\.js(?:on)?$/, /\.html/],
-        runtimeCaching: [
-          {
-            urlPattern: /[./]api[./]/,
-            handler: 'NetworkFirst',
-          },
-          {
-            urlPattern: /\.html/,
-            handler: 'NetworkFirst',
-          },
-        ],
-      }),
+      // 是否启用 ServiceWorker
+      useServiceworker &&
+        new GenerateSW({
+          cacheId,
+          skipWaiting: true,
+          clientsClaim: true,
+          exclude: [/\.map$/, /^manifest.*\.js(?:on)?$/, /\.html/],
+          runtimeCaching: [
+            {
+              urlPattern: /[./]api[./]/,
+              handler: 'NetworkFirst',
+            },
+            {
+              urlPattern: /\.html/,
+              handler: 'NetworkFirst',
+            },
+          ],
+        }),
 
       new MiniCssExtractPlugin({
         filename: useCssHash ? '[name].[hash].css' : '[name].css',

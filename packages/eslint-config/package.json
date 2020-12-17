@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/eslint-config",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Shareable ESLint Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

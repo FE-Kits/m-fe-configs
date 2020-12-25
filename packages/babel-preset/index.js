@@ -90,9 +90,7 @@ module.exports = declare(
           loose: classLoose,
         },
       ],
-      [
-        require('@babel/plugin-syntax-dynamic-import')
-      ]
+      [require('@babel/plugin-syntax-dynamic-import')],
     ];
 
     if (metadata) {

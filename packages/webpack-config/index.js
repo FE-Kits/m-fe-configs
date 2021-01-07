@@ -11,6 +11,8 @@ module.exports = ({
   useFractalNpmPackages = false,
   useCssHash = false,
   extendedBaseConfig = {},
+  // 需要编译的 Node 模块
+  compiledNodeModules = [],
   htmlWebpackPluginOptions = {},
   useServiceworker = true,
 } = {}) => {
@@ -24,6 +26,7 @@ module.exports = ({
       title,
       target,
       useCssModule,
+      compiledNodeModules,
     }),
     extendedBaseConfig,
   );

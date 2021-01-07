@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/app-config",
-  "version": "0.7.15",
+  "version": "0.7.16",
   "description": "Shareable configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "homepage": "https://github.com/wx-chevalier/m-fe-configs",
@@ -24,7 +24,7 @@
     "@m-fe/stylelint-config": "^0.0.9",
     "@m-fe/tsconfig": "^0.0.4",
     "@m-fe/tslint-config": "^0.0.5",
-    "@m-fe/webpack-config": "^0.1.26",
+    "@m-fe/webpack-config": "^0.1.28",
     "@svgr/webpack": "^5.4.0",
     "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.5",

@@ -9,7 +9,12 @@ const NODE_MODULES_REG = /[\\/]node_modules[\\/]/;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const __DEV__ = NODE_ENV === 'development' || NODE_ENV === 'dev';
 
-module.exports = ({ rootPath, themeVars, useCssModule } = {}) => {
+module.exports = ({
+  rootPath,
+  themeVars,
+  useCssModule,
+  compiledNodeModules = [],
+} = {}) => {
   const buildEnv = {
     rootPath,
 
@@ -93,7 +98,12 @@ module.exports = ({ rootPath, themeVars, useCssModule } = {}) => {
               },
             },
           ],
-          exclude: NODE_MODULES_REG,
+          exclude:
+            Array.isArray(compiledNodeModules) && compiledNodeModules.length > 0
+              ? new RegExp(
+                  `node_modules/(?!(${compiledNodeModules.join('|')})/).*`,
+                )
+              : NODE_MODULES_REG,
         },
         {
           test: /\.(png|jpg|gif)$/,

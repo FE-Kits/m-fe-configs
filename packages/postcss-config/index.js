@@ -15,6 +15,7 @@ module.exports = ({
     require('postcss-import', importOptions),
     require('postcss-normalize', normalize),
     require('postcss-url', url),
+    require('tailwindcss'),
     require('autoprefixer'),
   ];
 

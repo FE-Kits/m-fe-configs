@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/postcss-config",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Shareable PostCSS Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",
@@ -9,6 +9,7 @@
     "postcss": ">=7.0.0"
   },
   "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.7.1",
     "cssnano": "^4.1.10",
     "cssnano-preset-advanced": "^4.0.7",
@@ -16,7 +17,8 @@
     "postcss-modules": "^1.4.1",
     "postcss-normalize": "^8.0.1",
     "postcss-preset-env": "^6.7.0",
-    "postcss-url": "^8.0.0"
+    "postcss-url": "^8.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "publishConfig": {
     "access": "public"

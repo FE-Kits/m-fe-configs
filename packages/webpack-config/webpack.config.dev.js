@@ -16,7 +16,7 @@ module.exports = baseConfig => {
       rules: [
         {
           test: /\.css$/,
-          use: ['style-loader', 'cache-loader', 'css-loader'],
+          use: ['style-loader', 'cache-loader', 'css-loader', 'postcss-loader'],
         },
         {
           test: /\.less$/,

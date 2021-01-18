@@ -2060,6 +2060,20 @@
     prettier-plugin-sh "^0.2.8"
     prettier-plugin-toml "^0.3.1"
 
+"@m-fe/postcss-config@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npm.taobao.org/@m-fe/postcss-config/download/@m-fe/postcss-config-0.0.3.tgz#b44fc6e226b4b4802fd45af1e5f28c3368dab2dd"
+  integrity sha1-tE/G4ia0tIAv1Frx5fKMM2jast0=
+  dependencies:
+    autoprefixer "^9.7.1"
+    cssnano "^4.1.10"
+    cssnano-preset-advanced "^4.0.7"
+    postcss-import "^12.0.1"
+    postcss-modules "^1.4.1"
+    postcss-normalize "^8.0.1"
+    postcss-preset-env "^6.7.0"
+    postcss-url "^8.0.0"
+
 "@m-fe/prettier-config@^0.0.2":
   version "0.0.2"
   resolved "https://registry.npm.taobao.org/@m-fe/prettier-config/download/@m-fe/prettier-config-0.0.2.tgz#0546c707bf40d175fee7cddbaa5657e80c2fd5ec"
@@ -7202,6 +7216,11 @@ eslint-plugin-react@^7.16.0, eslint-plugin-react@^7.20.0:
     prop-types "^15.7.2"
     resolve "^1.17.0"
     string.prototype.matchall "^4.0.2"
+
+eslint-plugin-simple-import-sort@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-simple-import-sort/download/eslint-plugin-simple-import-sort-7.0.0.tgz#a1dad262f46d2184a90095a60c66fef74727f0f8"
+  integrity sha1-odrSYvRtIYSpAJWmDGb+90cn8Pg=
 
 eslint-plugin-sonarjs@^0.5.0:
   version "0.5.0"

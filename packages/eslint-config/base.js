@@ -72,7 +72,7 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'jsx-indent': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/ban-types': 1,
+    '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/ban-ts-comment': 0,
     'simple-import-sort/imports': 1,
     'simple-import-sort/exports': 1,

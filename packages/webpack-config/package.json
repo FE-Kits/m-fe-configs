@@ -1,6 +1,6 @@
 {
   "name": "@m-fe/webpack-config",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Shareable Webpack Configuration for all micro-frontend projects.",
   "repository": "https://github.com/wx-chevalier/m-fe-configs",
   "author": "wx-chevalier",

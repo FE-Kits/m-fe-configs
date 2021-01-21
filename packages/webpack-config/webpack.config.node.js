@@ -65,7 +65,7 @@ module.exports = ({ rootPath = process.cwd() } = {}) => {
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({
-        eslint: true,
+        eslint: { files: './src/**/*.{ts,tsx,js,jsx}' },
       }),
       new webpack.IgnorePlugin(/\.js\.map$/),
     ],

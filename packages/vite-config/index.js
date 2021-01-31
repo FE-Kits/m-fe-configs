@@ -1,13 +1,13 @@
-import path from 'path';
+const path = require('path');
 
-import reactRefresh from '@vitejs/plugin-react-refresh';
-import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy';
-import createImportPlugin from 'vite-plugin-import';
-import { VitePWA } from 'vite-plugin-pwa';
-import tsconfigPaths from 'vite-tsconfig-paths';
+const reactRefresh = require('@vitejs/plugin-react-refresh');
+const { defineConfig } = require('vite');
+const legacy = require('@vitejs/plugin-legacy');
+const { default: createImportPlugin } = require('vite-plugin-import');
+const { VitePWA } = require('vite-plugin-pwa');
+const { default: tsconfigPaths } = require('vite-tsconfig-paths');
 
-export default basePath =>
+exports.genConfig = basePath =>
   defineConfig({
     alias: {
       '@/': path.resolve(basePath, './src'),

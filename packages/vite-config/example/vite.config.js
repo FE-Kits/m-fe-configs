@@ -1,3 +1,3 @@
-import genConfig from '../';
+const { genConfig } = require('../');
 
-export default genConfig(__dirname);
+module.exports = genConfig(__dirname);

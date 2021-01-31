@@ -13,6 +13,7 @@ module.exports = ({
   rootPath,
   themeVars,
   useCssModule,
+  useScriptCache,
   compiledNodeModules = [],
 } = {}) => {
   const buildEnv = {
@@ -89,15 +90,15 @@ module.exports = ({
         {
           test: /\.[jt]sx?$/,
           use: [
-            'cache-loader',
+            useScriptCache && 'cache-loader',
             'thread-loader',
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: true,
+                cacheDirectory: useScriptCache,
               },
             },
-          ],
+          ].filter(c => !!c),
           exclude:
             Array.isArray(compiledNodeModules) && compiledNodeModules.length > 0
               ? new RegExp(

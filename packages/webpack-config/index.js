@@ -10,6 +10,7 @@ module.exports = ({
   usePrepack = false,
   useFractalNpmPackages = false,
   useCssHash = false,
+  useScriptCache = true,
   extendedBaseConfig = {},
   // 需要编译的 Node 模块
   compiledNodeModules = [],
@@ -26,6 +27,7 @@ module.exports = ({
       title,
       target,
       useCssModule,
+      useScriptCache,
       compiledNodeModules,
     }),
     extendedBaseConfig,
@@ -39,6 +41,7 @@ module.exports = ({
       themeVars,
       title,
       target,
+      useScriptCache,
     },
   );
 

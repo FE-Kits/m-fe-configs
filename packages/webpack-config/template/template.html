@@ -10,7 +10,8 @@
 
     <% for (key in htmlWebpackPlugin.files.css) { %>
       <% if (htmlWebpackPlugin.files.cssIntegrity) { %>
-        <link href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key].replace('./','').replace('/','') %>"
+        <link
+          href="<%= htmlWebpackPlugin.options.publicPath %><%= htmlWebpackPlugin.files.css[key].replace('./','').replace('/','') %>"
           rel="stylesheet" integrity="<%= htmlWebpackPlugin.files.cssIntegrity[key] %>"
           crossorigin="<%= webpackConfig.output.crossOriginLoading %>" />
         <% } else { %>
@@ -46,77 +47,6 @@
                 .async_script {
                   display: none
                 }
-
-                .loader,
-                .loader:after,
-                .loader:before {
-                  background: #ed8c3d;
-                  -webkit-animation: load1 1s infinite ease-in-out;
-                  animation: load1 1s infinite ease-in-out;
-                  width: 1em;
-                  height: 4em
-                }
-
-                .loader {
-                  top: 35%;
-                  color: #fff;
-                  text-indent: -9999em;
-                  margin: 88px auto;
-                  position: relative;
-                  font-size: 11px;
-                  -webkit-transform: translateZ(0);
-                  -ms-transform: translateZ(0);
-                  transform: translateZ(0);
-                  -webkit-animation-delay: -.16s;
-                  animation-delay: -.16s
-                }
-
-                .loader:after,
-                .loader:before {
-                  position: absolute;
-                  top: 0;
-                  content: ''
-                }
-
-                .loader:before {
-                  left: -1.5em;
-                  -webkit-animation-delay: -.32s;
-                  animation-delay: -.32s
-                }
-
-                .loader:after {
-                  left: 1.5em
-                }
-
-                @-webkit-keyframes load1 {
-
-                  0%,
-                  100%,
-                  80% {
-                    box-shadow: 0 0;
-                    height: 4em
-                  }
-
-                  40% {
-                    box-shadow: 0 -2em;
-                    height: 5em
-                  }
-                }
-
-                @keyframes load1 {
-
-                  0%,
-                  100%,
-                  80% {
-                    box-shadow: 0 0;
-                    height: 4em
-                  }
-
-                  40% {
-                    box-shadow: 0 -2em;
-                    height: 5em
-                  }
-                }
               </style>
   </head>
 
@@ -128,17 +58,17 @@
           <svg style="width: 100px; height:100px" version="1.1" id="L1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
             enable-background="new 0 0 100 100" xml:space="preserve">
-            <circle fill="none" stroke="#ed8c3d" stroke-width="6" stroke-miterlimit="15"
+            <circle fill="none" stroke="rgba(0,0,0,0.65)" stroke-width="6" stroke-miterlimit="15"
               stroke-dasharray="14.2472,14.2472" cx="50" cy="50" r="47">
               <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="5s" from="0 50 50"
                 to="360 50 50" repeatCount="indefinite" />
             </circle>
-            <circle fill="none" stroke="#ed8c3d" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="10,10"
-              cx="50" cy="50" r="39">
+            <circle fill="none" stroke="black" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="10,10" cx="50"
+              cy="50" r="39">
               <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="5s" from="0 50 50"
                 to="-360 50 50" repeatCount="indefinite" />
             </circle>
-            <g fill="#ed8c3d">
+            <g fill="black">
               <rect x="30" y="35" width="5" height="30">
                 <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5"
                   repeatCount="indefinite" begin="0.1" />
@@ -161,8 +91,28 @@
               </rect>
             </g>
           </svg>
-          <div style="margin-top: 24px;">如果持续白屏，请使用 <a href="https://www.google.cn/chrome/">Chrome 浏览器</a>或者<a
-              href="https://browser.360.cn/ee/mac/index.html"> 360 极速浏览器</a>。</div>
+          <div style="margin-top: 24px">
+            资源加载中，<span id="loader-count">0</span>% 请稍候。。。
+          </div>
+          <script>
+            try {
+              var count = 0;
+              var handler;
+              handler = setInterval(function () {
+                if (count > 99) {
+                  clearInterval(handler)
+                } else {
+                  count++;
+                  var ele = document.getElementById("loader-count")
+                  ele.innerText = count;
+                }
+              }, 1000);
+            } catch (_) {
+              console.error(_)
+            }
+          </script>
+          <div style="margin-top: 24px">推荐使用 <a href="https://www.google.cn/chrome/">Chrome
+              浏览器</a>或者<a href="https://browser.360.cn/ee/mac/index.html"> 360 极速浏览器</a></div>
         </div>
 
       </div>

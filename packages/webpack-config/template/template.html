@@ -104,7 +104,9 @@
                 } else {
                   count++;
                   var ele = document.getElementById("loader-count")
-                  ele.innerText = count;
+                  if (ele) {
+                    ele.innerText = count;
+                  }
                 }
               }, 1000);
             } catch (_) {

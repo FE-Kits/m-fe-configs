@@ -8,12 +8,14 @@
   "scripts": {
     "build": "rm -rf example/build && cross-env NODE_ENV=production webpack --config ./example/scripts/webpack/webpack.config.prod.js -p",
     "build:node": "rm -rf ./example-node/build && cross-env NODE_ENV=production webpack --config ./example-node/webpack.config.js -p --progress",
+    "build:vendor": "webpack --config ./example/scripts/webpack/webpack.config.vendor",
     "dev": "webpack-dev-server --config ./example/scripts/webpack/webpack.config.dev.js --hot --progress",
     "dev:node": "webpack --config ./example-node/webpack.config.js --watch --progress"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.0",
     "@svgr/webpack": "^5.4.0",
+    "autodll-webpack-plugin": "^0.4.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",

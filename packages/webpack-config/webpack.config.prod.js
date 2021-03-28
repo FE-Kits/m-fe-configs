@@ -10,6 +10,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const PrepackWebpackPlugin = require('prepack-webpack-plugin').default;
+const AutoDllPlugin = require('autodll-webpack-plugin');
 
 module.exports = (
   baseConfig,
@@ -126,6 +127,13 @@ module.exports = (
         scripts: [],
         publicPath: baseConfig.output.publicPath || './',
         ...htmlWebpackPluginOptions,
+      }),
+      new AutoDllPlugin({
+        inject: true, // will inject the DLL bundles to index.html
+        filename: '[name].js',
+        entry: {
+          vendor: ['react', 'react-dom'],
+        },
       }),
       new HtmlWebpackHarddiskPlugin(),
     ].filter(p => !!p),

@@ -8,7 +8,7 @@ const configMap = require('../../..')({
       index: path.resolve(__dirname, '../../src/index'),
     },
     output: {
-      // publicPath: './',
+      publicPath: './',
     },
     resolve: {
       alias: {
